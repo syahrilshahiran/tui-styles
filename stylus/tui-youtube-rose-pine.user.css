@@ -1007,4 +1007,22 @@
                 14px 0 0 0 var(--tui-main);
         }
     }
+    /* More comments below button */
+    yt-live-chat-item-list-renderer #show-more,
+    yt-live-chat-item-list-renderer #show-more button,
+    yt-live-chat-item-list-renderer #show-more yt-icon {
+        background: var(--rp-overlay) !important;
+        border: 1px solid var(--rp-overlay) !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Kill focus state */
+    yt-live-chat-item-list-renderer #show-more:focus,
+    yt-live-chat-item-list-renderer #show-more button:focus,
+    yt-live-chat-item-list-renderer #show-more:focus-visible,
+    yt-live-chat-item-list-renderer #show-more button:focus-visible {
+        outline: none !important;
+        box-shadow: none !important;
+    }
 }
