@@ -2,7 +2,6 @@
 @name           tui-youtube-rose-pine
 @namespace      github.com/syahrilshahiran/tui-styles
 @version        1.0.1
-@updateURL      https://github.com/syahrilshahiran/tui-styles/raw/main/stylus/tui-youtube-rose-pine.user.css
 @description    A TUI/terminal-style reskin of YouTube in Rosé Pine colors with adjusted typography.
 @author         syahrilshahiran
 @license        MIT
@@ -104,12 +103,10 @@
         --yt-spec-button-chip-background-hover: var(--tui-bg-3) !important;
         --yt-spec-outline-inverse-medium: var(--tui-bg-2) !important;
         --yt-spec-wordmark-text: var(--tui-fg) !important;
-        --yt-spec-static-overlay-background-medium: rgba(
-            25,
-            23,
-            36,
-            0.8
-        ) !important;
+        --yt-spec-static-overlay-background-medium: rgba( 25,
+        23,
+        36,
+        0.8) !important;
 
         --paper-spinner-color: var(--tui-fg-dim) !important;
         --paper-input-container-color: var(--tui-fg-dim) !important;
@@ -488,21 +485,14 @@
         fill: transparent !important;
     }
 
-    like-button-view-model
-        toggle-button-view-model[aria-pressed="true"]
-        svg
-        path,
-    dislike-button-view-model
-        toggle-button-view-model[aria-pressed="true"]
-        svg
-        path {
+    like-button-view-model toggle-button-view-model[aria-pressed="true"] svg path,
+    dislike-button-view-model toggle-button-view-model[aria-pressed="true"] svg path {
         fill: var(--tui-main) !important;
         stroke: var(--tui-main) !important;
     }
 
     .yt-spec-button-shape-next--mono.yt-spec-button-shape-next--filled .yt-icon,
-    .yt-spec-button-shape-next--mono.yt-spec-button-shape-next--filled
-        > .yt-spec-button-shape-next__icon {
+    .yt-spec-button-shape-next--mono.yt-spec-button-shape-next--filled > .yt-spec-button-shape-next__icon {
         color: var(--tui-main) !important;
     }
     .yt-spec-button-shape-next--mono.yt-spec-button-shape-next--tonal[aria-label="Join this channel"] {
@@ -577,8 +567,7 @@
         font-size: 0.8rem !important;
         line-height: 1.7 !important;
     }
-    ytd-watch-metadata[clickable-description][description-collapsed]
-        #description.ytd-watch-metadata:hover {
+    ytd-watch-metadata[clickable-description][description-collapsed] #description.ytd-watch-metadata:hover {
         background: var(--tui-bg-3) !important;
     }
     #description a,
@@ -593,10 +582,8 @@
     /* ─── VIDEO PLAYER ───────────────────────────────────────────────── */
     .ytp-chrome-bottom,
     .ytp-chrome-controls {
-        background: linear-gradient(
-            transparent,
-            rgba(25, 23, 36, 0.8)
-        ) !important;
+        background: linear-gradient( transparent,
+        rgba(25, 23, 36, 0.8)) !important;
     }
     .ytp-play-progress,
     .ytp-progress-bar-played,
@@ -766,8 +753,7 @@
     h2.ytd-simple-menu-header-renderer {
         color: var(--tui-fg) !important;
     }
-    .yt-spec-icon-badge-shape--type-notification
-        .yt-spec-icon-badge-shape__badge {
+    .yt-spec-icon-badge-shape--type-notification .yt-spec-icon-badge-shape__badge {
         background-color: var(--tui-main) !important;
         border: none !important;
     }
@@ -784,8 +770,7 @@
         background-color: var(--tui-bg-3) !important;
         color: var(--tui-fg) !important;
     }
-    yt-notification-action-renderer
-        .yt-spec-button-shape-next--call-to-action-inverse {
+    yt-notification-action-renderer .yt-spec-button-shape-next--call-to-action-inverse {
         color: var(--tui-main) !important;
     }
 
@@ -893,8 +878,7 @@
 
     /* ─── PROGRESS BAR (Page Navigation) ──────────────────────────────── */
     #progress,
-    yt-page-navigation-progress[enable-refresh-signature-moments-web]
-        #progress {
+    yt-page-navigation-progress[enable-refresh-signature-moments-web] #progress {
         background-color: var(--tui-main) !important;
     }
     yt-page-navigation-progress {
@@ -935,28 +919,24 @@
     @keyframes tui-dots {
         0% {
             background-color: rgba(224, 222, 244, 0.1);
-            box-shadow:
-                -20px 0 0 0 rgba(224, 222, 244, 0.1),
-                20px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -20px 0 0 0 rgba(224, 222, 244, 0.1),
+            20px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         25% {
             background-color: rgba(224, 222, 244, 0.1);
-            box-shadow:
-                -20px 0 0 0 var(--tui-main),
-                20px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -20px 0 0 0 var(--tui-main),
+            20px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         50% {
             background-color: var(--tui-main);
-            box-shadow:
-                -20px 0 0 0 var(--tui-main),
-                20px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -20px 0 0 0 var(--tui-main),
+            20px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         75%,
         100% {
             background-color: var(--tui-main);
-            box-shadow:
-                -20px 0 0 0 var(--tui-main),
-                20px 0 0 0 var(--tui-main);
+            box-shadow: -20px 0 0 0 var(--tui-main),
+            20px 0 0 0 var(--tui-main);
         }
     }
 
@@ -988,28 +968,24 @@
     @keyframes tui-comment-dots {
         0% {
             background-color: rgba(224, 222, 244, 0.1);
-            box-shadow:
-                -14px 0 0 0 rgba(224, 222, 244, 0.1),
-                14px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -14px 0 0 0 rgba(224, 222, 244, 0.1),
+            14px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         25% {
             background-color: rgba(224, 222, 244, 0.1);
-            box-shadow:
-                -14px 0 0 0 var(--tui-main),
-                14px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -14px 0 0 0 var(--tui-main),
+            14px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         50% {
             background-color: var(--tui-main);
-            box-shadow:
-                -14px 0 0 0 var(--tui-main),
-                14px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -14px 0 0 0 var(--tui-main),
+            14px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         75%,
         100% {
             background-color: var(--tui-main);
-            box-shadow:
-                -14px 0 0 0 var(--tui-main),
-                14px 0 0 0 var(--tui-main);
+            box-shadow: -14px 0 0 0 var(--tui-main),
+            14px 0 0 0 var(--tui-main);
         }
     }
     /* More comments below button */
