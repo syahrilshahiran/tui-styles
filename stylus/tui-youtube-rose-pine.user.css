@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           tui-youtube-rose-pine
 @namespace      github.com/syahrilshahiran/tui-styles
-@version        1.0.1
+@version        1.0.2
 @description    A TUI/terminal-style reskin of YouTube in Rosé Pine colors with adjusted typography.
 @author         syahrilshahiran
 @license        MIT
@@ -19,38 +19,41 @@
 
     /* ─── ROSE PINE PALETTE ──────────────────────────────────────────── */
     :root {
-        --rp-base: #191724;
-        --rp-surface: #1f1d2e;
-        --rp-overlay: #26233a;
-        --rp-muted: #6e6a86;
-        --rp-subtle: #908caa;
-        --rp-text: #e0def4;
-        --rp-love: #eb6f92;
-        --rp-gold: #f6c177;
-        --rp-rose: #ebbcba;
-        --rp-pine: #31748f;
-        --rp-foam: #9ccfd8;
-        --rp-iris: #c4a7e7;
-        --rp-hl-low: #21202e;
-        --rp-hl-med: #403d52;
-        --rp-hl-high: #524f67;
-    }
-
-    if tui-style=="Rose-Pine-Moon" {
-        :root {
+        if tui-style == "Rose-Pine" {
+            --rp-base: #191724;
+            --rp-surface: #1f1d2e;
+            --rp-overlay: #26233a;
+            --rp-muted: #6e6a86;
+            --rp-subtle: #908caa;
+            --rp-text: #e0def4;
+            --rp-love: #eb6f92;
+            --rp-gold: #f6c177;
+            --rp-rose: #ebbcba;
+            --rp-pine: #31748f;
+            --rp-foam: #9ccfd8;
+            --rp-iris: #c4a7e7;
+            --rp-hl-low: #21202e;
+            --rp-hl-med: #403d52;
+            --rp-hl-high: #524f67;
+        }
+        else if tui-style == "Rose-Pine-Moon" {
             --rp-base: #232136;
             --rp-surface: #2a273f;
             --rp-overlay: #393552;
+            --rp-muted: #6e6a86;
+            --rp-subtle: #908caa;
+            --rp-text: #e0def4;
+            --rp-love: #eb6f92;
+            --rp-gold: #f6c177;
             --rp-rose: #ea9a97;
             --rp-pine: #3e8fb0;
+            --rp-foam: #9ccfd8;
+            --rp-iris: #c4a7e7;
             --rp-hl-low: #2a283e;
             --rp-hl-med: #44415a;
             --rp-hl-high: #56526e;
         }
-    }
-
-    if tui-style=="Rose-Pine-Dawn" {
-        :root {
+        else if tui-style == "Rose-Pine-Dawn" {
             --rp-base: #faf4ed;
             --rp-surface: #fffaf3;
             --rp-overlay: #f2e9e1;
@@ -67,9 +70,7 @@
             --rp-hl-med: #dfdad9;
             --rp-hl-high: #cecacd;
         }
-    }
 
-    :root {
         /* Semantic TUI Mapping */
         --tui-bg: var(--rp-base);
         --tui-bg-2: var(--rp-surface);
@@ -103,10 +104,7 @@
         --yt-spec-button-chip-background-hover: var(--tui-bg-3) !important;
         --yt-spec-outline-inverse-medium: var(--tui-bg-2) !important;
         --yt-spec-wordmark-text: var(--tui-fg) !important;
-        --yt-spec-static-overlay-background-medium: rgba( 25,
-        23,
-        36,
-        0.8) !important;
+        --yt-spec-static-overlay-background-medium: rgba(25, 23, 36, 0.8) !important;
 
         --paper-spinner-color: var(--tui-fg-dim) !important;
         --paper-input-container-color: var(--tui-fg-dim) !important;
@@ -397,7 +395,6 @@
         color: var(--tui-main) !important;
     }
 
-    /* Modernized to include new Wiz rendering engine components alongside legacy objects */
     #channel-name,
     #byline.ytd-video-meta-block,
     #metadata-line span,
@@ -407,7 +404,6 @@
         font-size: 1.2rem !important;
     }
 
-    /* Retained uniform grid scaling to prevent breaking layout flow */
     #text.ytd-channel-name {
         color: var(--tui-main) !important;
         font-size: 1.5rem !important;
@@ -470,7 +466,6 @@
         color: var(--tui-fg) !important;
     }
 
-    /* Versatile wildcards implemented to protect segmented layouts from dynamic wrapper rewrites */
     [class*="like-button-view-model"] button,
     [class*="dislike-button-view-model"] button,
     segmented-like-dislike-button-view-model {
@@ -549,7 +544,6 @@
         border-color: var(--tui-border) !important;
     }
 
-    /* Updated to target both the legacy component structure and modern web view-models safely */
     ytd-video-owner-renderer #channel-name a,
     ytd-video-owner-renderer #attributed-channel-name span {
         color: var(--tui-main) !important;
@@ -582,8 +576,7 @@
     /* ─── VIDEO PLAYER ───────────────────────────────────────────────── */
     .ytp-chrome-bottom,
     .ytp-chrome-controls {
-        background: linear-gradient( transparent,
-        rgba(25, 23, 36, 0.8)) !important;
+        background: linear-gradient(transparent, rgba(25, 23, 36, 0.8)) !important;
     }
     .ytp-play-progress,
     .ytp-progress-bar-played,
@@ -634,14 +627,12 @@
         background: transparent !important;
     }
 
-    /* Main comment text */
     #content-text.ytd-comment-renderer,
     #content-text.ytd-comment-view-model {
         color: var(--tui-fg) !important;
         font-size: 1.5rem !important;
     }
 
-    /* Author text */
     #author-text.yt-simple-endpoint.ytd-comment-renderer,
     #author-text.yt-simple-endpoint.ytd-comment-view-model {
         color: var(--tui-alt) !important;
@@ -652,7 +643,6 @@
         color: var(--tui-main) !important;
     }
 
-    /* Published time (Supports both old renderer and new view-model layout) */
     #published-time-text.ytd-comment-renderer,
     #published-time-text.ytd-comment-renderer a,
     #published-time-text.ytd-comment-view-model,
@@ -919,24 +909,19 @@
     @keyframes tui-dots {
         0% {
             background-color: rgba(224, 222, 244, 0.1);
-            box-shadow: -20px 0 0 0 rgba(224, 222, 244, 0.1),
-            20px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -20px 0 0 0 rgba(224, 222, 244, 0.1), 20px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         25% {
             background-color: rgba(224, 222, 244, 0.1);
-            box-shadow: -20px 0 0 0 var(--tui-main),
-            20px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -20px 0 0 0 var(--tui-main), 20px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         50% {
             background-color: var(--tui-main);
-            box-shadow: -20px 0 0 0 var(--tui-main),
-            20px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -20px 0 0 0 var(--tui-main), 20px 0 0 0 rgba(224, 222, 244, 0.1);
         }
-        75%,
-        100% {
+        75%, 100% {
             background-color: var(--tui-main);
-            box-shadow: -20px 0 0 0 var(--tui-main),
-            20px 0 0 0 var(--tui-main);
+            box-shadow: -20px 0 0 0 var(--tui-main), 20px 0 0 0 var(--tui-main);
         }
     }
 
@@ -968,37 +953,32 @@
     @keyframes tui-comment-dots {
         0% {
             background-color: rgba(224, 222, 244, 0.1);
-            box-shadow: -14px 0 0 0 rgba(224, 222, 244, 0.1),
-            14px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -14px 0 0 0 rgba(224, 222, 244, 0.1), 14px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         25% {
             background-color: rgba(224, 222, 244, 0.1);
-            box-shadow: -14px 0 0 0 var(--tui-main),
-            14px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -14px 0 0 0 var(--tui-main), 14px 0 0 0 rgba(224, 222, 244, 0.1);
         }
         50% {
             background-color: var(--tui-main);
-            box-shadow: -14px 0 0 0 var(--tui-main),
-            14px 0 0 0 rgba(224, 222, 244, 0.1);
+            box-shadow: -14px 0 0 0 var(--tui-main), 14px 0 0 0 rgba(224, 222, 244, 0.1);
         }
-        75%,
-        100% {
+        75%, 100% {
             background-color: var(--tui-main);
-            box-shadow: -14px 0 0 0 var(--tui-main),
-            14px 0 0 0 var(--tui-main);
+            box-shadow: -14px 0 0 0 var(--tui-main), 14px 0 0 0 var(--tui-main);
         }
     }
-    /* More comments below button */
+
+    /* ─── LIVE CHAT ──────────────────────────────────────────────────── */
     yt-live-chat-item-list-renderer #show-more,
     yt-live-chat-item-list-renderer #show-more button,
     yt-live-chat-item-list-renderer #show-more yt-icon {
-        background: var(--rp-overlay) !important;
-        border: 1px solid var(--rp-overlay) !important;
+        background: var(--tui-bg-3) !important;
+        border: 1px solid var(--tui-bg-3) !important;
         outline: none !important;
         box-shadow: none !important;
     }
 
-    /* Kill focus state */
     yt-live-chat-item-list-renderer #show-more:focus,
     yt-live-chat-item-list-renderer #show-more button:focus,
     yt-live-chat-item-list-renderer #show-more:focus-visible,
