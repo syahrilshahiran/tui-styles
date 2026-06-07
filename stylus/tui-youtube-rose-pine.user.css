@@ -907,123 +907,104 @@
         outline: 1px solid var(--tui-main) !important;
         outline-offset: 2px !important;
     }
-}
 
-/* ─── CUSTOM TUI DOT LOADING SPINNER ────────────────────────────── */
-/* Hide the native YouTube loading graphic wheels */
-.ytp-spinner-container {
-    display: none !important;
-}
-
-/* Clear default backgrounds from the wrapper without breaking its visibility */
-.ytp-spinner {
-    background: none !important;
-}
-
-/* Inject the retro TUI block dots relative to the player's native position */
-.ytp-spinner::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 10px;
-    height: 10px;
-    transform: translate(-50%, -50%);
-    background-color: rgba(224, 222, 244, 0.1);
-    /* Dim background state for dots */
-    border-radius: 0 !important;
-    animation: tui-dots 1.2s infinite steps(4);
-    /* Steps gives it that jerky retro feel */
-}
-
-/* Retro stepped terminal dot sequence */
-@keyframes tui-dots {
-    0% {
+    /* ─── CUSTOM TUI DOT LOADING SPINNER ────────────────────────────── */
+    .ytp-spinner-container {
+        display: none !important;
+    }
+    .ytp-spinner {
+        background: none !important;
+    }
+    .ytp-spinner::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        transform: translate(-50%, -50%);
         background-color: rgba(224, 222, 244, 0.1);
-        box-shadow:
-            -20px 0 0 0 rgba(224, 222, 244, 0.1),
-            20px 0 0 0 rgba(224, 222, 244, 0.1);
+        border-radius: 0 !important;
+        animation: tui-dots 1.2s infinite steps(4);
     }
-    25% {
+    @keyframes tui-dots {
+        0% {
+            background-color: rgba(224, 222, 244, 0.1);
+            box-shadow:
+                -20px 0 0 0 rgba(224, 222, 244, 0.1),
+                20px 0 0 0 rgba(224, 222, 244, 0.1);
+        }
+        25% {
+            background-color: rgba(224, 222, 244, 0.1);
+            box-shadow:
+                -20px 0 0 0 var(--tui-main),
+                20px 0 0 0 rgba(224, 222, 244, 0.1);
+        }
+        50% {
+            background-color: var(--tui-main);
+            box-shadow:
+                -20px 0 0 0 var(--tui-main),
+                20px 0 0 0 rgba(224, 222, 244, 0.1);
+        }
+        75%,
+        100% {
+            background-color: var(--tui-main);
+            box-shadow:
+                -20px 0 0 0 var(--tui-main),
+                20px 0 0 0 var(--tui-main);
+        }
+    }
+
+    /* ─── CUSTOM TUI COMMENT LOADING SPINNER ────────────────────────── */
+    tp-yt-paper-spinner #spinnerContainer,
+    tp-yt-paper-spinner-lite #spinnerContainer {
+        display: none !important;
+    }
+    tp-yt-paper-spinner[active],
+    tp-yt-paper-spinner-lite[active] {
+        position: relative !important;
+        background: none !important;
+        width: 50px !important;
+        height: 20px !important;
+    }
+    tp-yt-paper-spinner[active]::after,
+    tp-yt-paper-spinner-lite[active]::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        transform: translate(-50%, -50%);
         background-color: rgba(224, 222, 244, 0.1);
-        box-shadow:
-            -20px 0 0 0 var(--tui-main),
-            20px 0 0 0 rgba(224, 222, 244, 0.1);
-        /* Left dot lights up */
+        border-radius: 0 !important;
+        animation: tui-comment-dots 1.2s infinite steps(4);
     }
-    50% {
-        background-color: var(--tui-main);
-        /* Center dot lights up */
-        box-shadow:
-            -20px 0 0 0 var(--tui-main),
-            20px 0 0 0 rgba(224, 222, 244, 0.1);
-    }
-    75%,
-    100% {
-        background-color: var(--tui-main);
-        box-shadow:
-            -20px 0 0 0 var(--tui-main),
-            20px 0 0 0 var(--tui-main);
-        /* Right dot lights up */
-    }
-}
-
-/* ─── CUSTOM TUI COMMENT LOADING SPINNER ────────────────────────── */
-/* Hide the native paper spinner graphic rings completely */
-tp-yt-paper-spinner #spinnerContainer,
-tp-yt-paper-spinner-lite #spinnerContainer {
-    display: none !important;
-}
-
-/* Clear backgrounds only when the element is explicitly active */
-tp-yt-paper-spinner[active],
-tp-yt-paper-spinner-lite[active] {
-    position: relative !important;
-    background: none !important;
-    width: 50px !important;
-    height: 20px !important;
-}
-
-/* Inject the custom TUI dots strictly when loading state is active */
-tp-yt-paper-spinner[active]::after,
-tp-yt-paper-spinner-lite[active]::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 6px;
-    height: 6px;
-    transform: translate(-50%, -50%);
-    background-color: rgba(224, 222, 244, 0.1);
-    border-radius: 0 !important;
-    animation: tui-comment-dots 1.2s infinite steps(4);
-}
-
-/* Scaled retro dot sequence for comments */
-@keyframes tui-comment-dots {
-    0% {
-        background-color: rgba(224, 222, 244, 0.1);
-        box-shadow:
-            -14px 0 0 0 rgba(224, 222, 244, 0.1),
-            14px 0 0 0 rgba(224, 222, 244, 0.1);
-    }
-    25% {
-        background-color: rgba(224, 222, 244, 0.1);
-        box-shadow:
-            -14px 0 0 0 var(--tui-main),
-            14px 0 0 0 rgba(224, 222, 244, 0.1);
-    }
-    50% {
-        background-color: var(--tui-main);
-        box-shadow:
-            -14px 0 0 0 var(--tui-main),
-            14px 0 0 0 rgba(224, 222, 244, 0.1);
-    }
-    75%,
-    100% {
-        background-color: var(--tui-main);
-        box-shadow:
-            -14px 0 0 0 var(--tui-main),
-            14px 0 0 0 var(--tui-main);
+    @keyframes tui-comment-dots {
+        0% {
+            background-color: rgba(224, 222, 244, 0.1);
+            box-shadow:
+                -14px 0 0 0 rgba(224, 222, 244, 0.1),
+                14px 0 0 0 rgba(224, 222, 244, 0.1);
+        }
+        25% {
+            background-color: rgba(224, 222, 244, 0.1);
+            box-shadow:
+                -14px 0 0 0 var(--tui-main),
+                14px 0 0 0 rgba(224, 222, 244, 0.1);
+        }
+        50% {
+            background-color: var(--tui-main);
+            box-shadow:
+                -14px 0 0 0 var(--tui-main),
+                14px 0 0 0 rgba(224, 222, 244, 0.1);
+        }
+        75%,
+        100% {
+            background-color: var(--tui-main);
+            box-shadow:
+                -14px 0 0 0 var(--tui-main),
+                14px 0 0 0 var(--tui-main);
+        }
     }
 }
