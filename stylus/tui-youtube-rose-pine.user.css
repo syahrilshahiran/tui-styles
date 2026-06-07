@@ -6,7 +6,7 @@
 @description    A TUI/terminal-style reskin of YouTube in Rosé Pine colors with adjusted typography.
 @author         syahrilshahiran
 @license        MIT
-@preprocessor   default
+@preprocessor   stylus
 
 @var color     --tui-accent "Accent color" #eb6f92
 ==/UserStyle== */
@@ -15,57 +15,61 @@
 
     /* ─── ROSE PINE PALETTE ──────────────────────────────────────────── */
     :root {
-        /* Rosé Pine ─ swap this block for Moon or Dawn below */
-        --rp-base: #191724;
-        --rp-surface: #1f1d2e;
-        --rp-overlay: #26233a;
-        --rp-muted: #6e6a86;
-        --rp-subtle: #908caa;
-        --rp-text: #e0def4;
-        --rp-love: #eb6f92;
-        --rp-gold: #f6c177;
-        --rp-rose: #ebbcba;
-        --rp-pine: #31748f;
-        --rp-foam: #9ccfd8;
-        --rp-iris: #c4a7e7;
-        --rp-hl-low: #21202e;
-        --rp-hl-med: #403d52;
-        --rp-hl-high: #524f67;
+        if tui-style=="Rose-Pine" {
+            /* Rosé Pine ─ swap this block for Moon or Dawn below */
+            --rp-base: #191724;
+            --rp-surface: #1f1d2e;
+            --rp-overlay: #26233a;
+            --rp-muted: #6e6a86;
+            --rp-subtle: #908caa;
+            --rp-text: #e0def4;
+            --rp-love: #eb6f92;
+            --rp-gold: #f6c177;
+            --rp-rose: #ebbcba;
+            --rp-pine: #31748f;
+            --rp-foam: #9ccfd8;
+            --rp-iris: #c4a7e7;
+            --rp-hl-low: #21202e;
+            --rp-hl-med: #403d52;
+            --rp-hl-high: #524f67;
+        }
 
-        /* ── Rose Pine Moon ────────────────────────────────────────────
-    --rp-base:    #232136;
-    --rp-surface: #2a273f;
-    --rp-overlay: #393552;
-    --rp-muted:   #6e6a86;
-    --rp-subtle:  #908caa;
-    --rp-text:    #e0def4;
-    --rp-love:    #eb6f92;
-    --rp-gold:    #f6c177;
-    --rp-rose:    #ea9a97;
-    --rp-pine:    #3e8fb0;
-    --rp-foam:    #9ccfd8;
-    --rp-iris:    #c4a7e7;
-    --rp-hl-low:  #2a283e;
-    --rp-hl-med:  #44415a;
-    --rp-hl-high: #56526e;
-    ─────────────────────────────────────────────────────────────── */
-        /* ── Rose Pine Dawn (light) ────────────────────────────────────
-    --rp-base:    #faf4ed;
-    --rp-surface: #fffaf3;
-    --rp-overlay: #f2e9e1;
-    --rp-muted:   #9893a5;
-    --rp-subtle:  #797593;
-    --rp-text:    #575279;
-    --rp-love:    #b4637a;
-    --rp-gold:    #ea9d34;
-    --rp-rose:    #d7827a;
-    --rp-pine:    #286983;
-    --rp-foam:    #56949f;
-    --rp-iris:    #907aa9;
-    --rp-hl-low:  #f4ede8;
-    --rp-hl-med:  #dfdad9;
-    --rp-hl-high: #cecacd;
-    ─────────────────────────────────────────────────────────────── */
+        if tui-style=="Rose-Pine-Moon" {
+            --rp-base: #232136;
+            --rp-surface: #2a273f;
+            --rp-overlay: #393552;
+            --rp-muted: #6e6a86;
+            --rp-subtle: #908caa;
+            --rp-text: #e0def4;
+            --rp-love: #eb6f92;
+            --rp-gold: #f6c177;
+            --rp-rose: #ea9a97;
+            --rp-pine: #3e8fb0;
+            --rp-foam: #9ccfd8;
+            --rp-iris: #c4a7e7;
+            --rp-hl-low: #2a283e;
+            --rp-hl-med: #44415a;
+            --rp-hl-high: #56526e;
+        }
+
+        if tui-style=="Rose-Pine-Dawn" {
+            --rp-base: #faf4ed;
+            --rp-surface: #fffaf3;
+            --rp-overlay: #f2e9e1;
+            --rp-muted: #9893a5;
+            --rp-subtle: #797593;
+            --rp-text: #575279;
+            --rp-love: #b4637a;
+            --rp-gold: #ea9d34;
+            --rp-rose: #d7827a;
+            --rp-pine: #286983;
+            --rp-foam: #56949f;
+            --rp-iris: #907aa9;
+            --rp-hl-low: #f4ede8;
+            --rp-hl-med: #dfdad9;
+            --rp-hl-high: #cecacd;
+        }
+
         /* Semantic TUI Mapping */
         --tui-bg: var(--rp-base);
         --tui-bg-2: var(--rp-surface);
