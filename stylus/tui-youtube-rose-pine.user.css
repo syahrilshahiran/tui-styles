@@ -8,6 +8,11 @@
 @license        MIT
 @preprocessor   stylus
 
+@var select tui-style "Preset Theme" [
+    "Rose-Pine",
+    "Rose-Pine-Moon",
+    "Rose-Pine-Dawn"
+]
 @var color     --tui-accent "Accent color" #eb6f92
 ==/UserStyle== */
 @-moz-document domain("youtube.com") {
@@ -15,44 +20,38 @@
 
     /* ─── ROSE PINE PALETTE ──────────────────────────────────────────── */
     :root {
-        if tui-style=="Rose-Pine" {
-            /* Rosé Pine ─ swap this block for Moon or Dawn below */
-            --rp-base: #191724;
-            --rp-surface: #1f1d2e;
-            --rp-overlay: #26233a;
-            --rp-muted: #6e6a86;
-            --rp-subtle: #908caa;
-            --rp-text: #e0def4;
-            --rp-love: #eb6f92;
-            --rp-gold: #f6c177;
-            --rp-rose: #ebbcba;
-            --rp-pine: #31748f;
-            --rp-foam: #9ccfd8;
-            --rp-iris: #c4a7e7;
-            --rp-hl-low: #21202e;
-            --rp-hl-med: #403d52;
-            --rp-hl-high: #524f67;
-        }
+        --rp-base: #191724;
+        --rp-surface: #1f1d2e;
+        --rp-overlay: #26233a;
+        --rp-muted: #6e6a86;
+        --rp-subtle: #908caa;
+        --rp-text: #e0def4;
+        --rp-love: #eb6f92;
+        --rp-gold: #f6c177;
+        --rp-rose: #ebbcba;
+        --rp-pine: #31748f;
+        --rp-foam: #9ccfd8;
+        --rp-iris: #c4a7e7;
+        --rp-hl-low: #21202e;
+        --rp-hl-med: #403d52;
+        --rp-hl-high: #524f67;
+    }
 
-        if tui-style=="Rose-Pine-Moon" {
+    if tui-style=="Rose-Pine-Moon" {
+        :root {
             --rp-base: #232136;
             --rp-surface: #2a273f;
             --rp-overlay: #393552;
-            --rp-muted: #6e6a86;
-            --rp-subtle: #908caa;
-            --rp-text: #e0def4;
-            --rp-love: #eb6f92;
-            --rp-gold: #f6c177;
             --rp-rose: #ea9a97;
             --rp-pine: #3e8fb0;
-            --rp-foam: #9ccfd8;
-            --rp-iris: #c4a7e7;
             --rp-hl-low: #2a283e;
             --rp-hl-med: #44415a;
             --rp-hl-high: #56526e;
         }
+    }
 
-        if tui-style=="Rose-Pine-Dawn" {
+    if tui-style=="Rose-Pine-Dawn" {
+        :root {
             --rp-base: #faf4ed;
             --rp-surface: #fffaf3;
             --rp-overlay: #f2e9e1;
@@ -69,7 +68,9 @@
             --rp-hl-med: #dfdad9;
             --rp-hl-high: #cecacd;
         }
+    }
 
+    :root {
         /* Semantic TUI Mapping */
         --tui-bg: var(--rp-base);
         --tui-bg-2: var(--rp-surface);
