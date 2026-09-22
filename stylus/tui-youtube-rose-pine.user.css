@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           tui-youtube-rose-pine
 @namespace      github.com/syahrilshahiran/tui-styles
-@version        1.0.4
+@version        1.0.5
 @description    A TUI/terminal-style reskin of YouTube in Rosé Pine colors with adjusted typography.
 @author         syahrilshahiran
 @homepageURL    https://github.com/syahrilshahiran/tui-styles
@@ -769,11 +769,28 @@
         background: var(--tui-bg-3) !important;
     }
     #page-header-container.ytd-tabbed-page-header,
-    #tabs-container.ytd-tabbed-page-header {
+    #page-header.ytd-tabbed-page-header,
+    #tabs-container.ytd-tabbed-page-header,
+    #tabs-inner-container.ytd-tabbed-page-header {
         background-color: var(--tui-bg) !important;
     }
-    #channel-banner {
+    /* the banner is a view-model now; keep #channel-banner for older layouts */
+    #channel-banner,
+    yt-image-banner-view-model,
+    .ytImageBannerViewModelHost {
         filter: brightness(0.7) !important;
+    }
+    /* channel avatar — same border thumbnails get */
+    yt-page-header-view-model .ytSpecAvatarShapeHost {
+        border: 1px solid var(--tui-border) !important;
+    }
+    .ytPageHeaderViewModelTitle {
+        color: var(--tui-fg) !important;
+    }
+    .ytContentMetadataViewModelMetadataText,
+    .ytContentMetadataViewModelDelimiter,
+    .ytDescriptionPreviewViewModelHost {
+        color: var(--tui-fg-dim) !important;
     }
 
     tp-yt-paper-tabs,
@@ -962,6 +979,23 @@
     }
     #cinematics.ytd-watch-flexy {
         display: none !important;
+    }
+
+    /* ─── SHORTS PLAYER ──────────────────────────────────────────────── */
+    ytd-shorts,
+    #shorts-container.ytd-shorts,
+    #shorts-inner-container.ytd-shorts {
+        background-color: var(--tui-bg) !important;
+    }
+    /* cinematic ambience is already off on the watch page; same here.
+       the scrim is a hardcoded #0f0f0f gradient that ignores the theme */
+    #cinematic-shorts-scrim.ytd-shorts,
+    #shorts-cinematic-container.ytd-shorts,
+    #cinematic-container.ytd-reel-video-renderer {
+        display: none !important;
+    }
+    .reel-video-in-sequence-thumbnail.ytd-shorts {
+        background-color: var(--tui-bg) !important;
     }
     *:focus-visible {
         outline: 1px solid var(--tui-main) !important;
