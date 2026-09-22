@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           tui-youtube-rose-pine
 @namespace      github.com/syahrilshahiran/tui-styles
-@version        1.0.3
+@version        1.0.4
 @description    A TUI/terminal-style reskin of YouTube in Rosé Pine colors with adjusted typography.
 @author         syahrilshahiran
 @homepageURL    https://github.com/syahrilshahiran/tui-styles
@@ -384,6 +384,86 @@
     }
     ytd-thumbnail-overlay-time-status-renderer[overlay-style="LIVE"] span {
         color: var(--tui-bg) !important;
+    }
+
+    /* ─── THUMBNAIL BADGES (new view-model markup) ───────────────────── */
+    /* duration / generic overlay badge */
+    badge-shape.ytBadgeShapeThumbnailDefault,
+    badge-shape.ytBadgeShapeThumbnailDefault.ytBadgeShapeModern,
+    badge-shape.ytBadgeShapeThumbnailDefaultRedesign,
+    badge-shape.ytBadgeShapeThumbnailDefaultRedesign.ytBadgeShapeModern {
+        background: var(--tui-bg) !important;
+        border: 1px solid var(--tui-border) !important;
+        color: var(--tui-fg) !important;
+        backdrop-filter: none !important;
+    }
+
+    /* LIVE badge on thumbnails and in metadata rows */
+    badge-shape.ytBadgeShapeThumbnailLive,
+    badge-shape.ytBadgeShapeThumbnailLive.ytBadgeShapeModern,
+    badge-shape.ytBadgeShapeLive,
+    badge-shape.ytBadgeShapeLive.ytBadgeShapeModern,
+    badge-shape.ytBadgeShapeLive.ytBadgeShapeOverlay {
+        background: var(--tui-main) !important;
+        border: none !important;
+        color: var(--tui-bg) !important;
+        backdrop-filter: none !important;
+    }
+    badge-shape.ytBadgeShapeThumbnailLive .ytBadgeShapeIcon,
+    badge-shape.ytBadgeShapeLive .ytBadgeShapeIcon {
+        color: var(--tui-bg) !important;
+    }
+
+    /* "New" badge — YouTube moved it onto the thumbnail (top-start overlay) */
+    badge-shape.ytBadgeShapeThumbnailSpecial,
+    badge-shape.ytBadgeShapeThumbnailSpecial.ytBadgeShapeModern {
+        background: var(--tui-alt) !important;
+        border: none !important;
+        color: var(--tui-bg) !important;
+        backdrop-filter: none !important;
+    }
+    badge-shape.ytBadgeShapeThumbnailSpecial .ytBadgeShapeIcon,
+    badge-shape.ytBadgeShapeThumbnailSpecial.ytBadgeShapeModern .ytBadgeShapeIcon {
+        color: var(--tui-bg) !important;
+    }
+    badge-shape.ytBadgeShapeStatusNew,
+    badge-shape.ytBadgeShapeStatusNew.ytBadgeShapeModern {
+        background: transparent !important;
+        outline: 1px solid var(--tui-alt) !important;
+        color: var(--tui-alt) !important;
+    }
+
+    badge-shape.ytBadgeShapeThumbnailBadge,
+    badge-shape.ytBadgeShapeThumbnailBadge.ytBadgeShapeTypography {
+        font-size: 1rem !important;
+        line-height: 1.4rem !important;
+        font-weight: 400 !important;
+        padding: 0 4px !important;
+    }
+
+    /* ─── AVATAR LIVE RING / LIVE BADGE ──────────────────────────────── */
+    /* the ring is a masked ::after, so the global radius reset misses it
+       and it stays circular around a squared-off avatar */
+    .ytSpecAvatarShapeLiveRing::after {
+        border-radius: 0 !important;
+        background: var(--tui-main) !important;
+        inset: -3px !important;
+        padding: 1px !important;
+    }
+    .ytSpecAvatarShapeLiveBadge {
+        background-color: var(--tui-main) !important;
+        color: var(--tui-bg) !important;
+    }
+    .ytSpecAvatarShapeLiveBadgeText,
+    .ytSpecAvatarShapeLiveBadgeIcon {
+        color: var(--tui-bg) !important;
+        font-weight: 400 !important;
+    }
+    .ytSpecAvatarShapeLiveDot,
+    .ytSpecAvatarShapeNewContent {
+        border-radius: 0 !important;
+        border-color: var(--tui-bg) !important;
+        background-color: var(--tui-main) !important;
     }
 
     #video-title,
