@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           tui-youtube-rose-pine
 @namespace      github.com/syahrilshahiran/tui-styles
-@version        1.0.5
+@version        1.0.6
 @description    A TUI/terminal-style reskin of YouTube in Rosé Pine colors with adjusted typography.
 @author         syahrilshahiran
 @homepageURL    https://github.com/syahrilshahiran/tui-styles
@@ -351,6 +351,25 @@
     }
     yt-chip-cloud-renderer {
         background: transparent !important;
+    }
+
+    /* view-model chips (e.g. Chapters / Transcript tabs in "In this video") */
+    yt-chip-bar-view-model,
+    .ytChipBarViewModelHost {
+        background: transparent !important;
+    }
+    .ytChipShapeChip.ytChipShapeInactive {
+        background-color: var(--tui-bg) !important;
+        border: 1px solid var(--tui-border) !important;
+        color: var(--tui-fg) !important;
+    }
+    .ytChipShapeChip.ytChipShapeActive {
+        background-color: var(--tui-main) !important;
+        border: 1px solid var(--tui-main) !important;
+        color: var(--tui-bg) !important;
+    }
+    .ytChipShapeChip.ytChipShapeInactive:hover {
+        background-color: var(--tui-bg-3) !important;
     }
 
     #left-arrow-button.ytd-feed-filter-chip-bar-renderer,
@@ -846,6 +865,119 @@
         border: none !important;
     }
 
+    /* video options / context menus (view-model based) */
+    yt-contextual-sheet-layout,
+    yt-sheet-view-model,
+    .ytContextualSheetLayoutHost,
+    .ytContextualSheetLayoutContentContainer,
+    yt-list-view-model,
+    .yt-list-view-model,
+    ytd-menu-popup-renderer,
+    tp-yt-paper-listbox.ytd-menu-popup-renderer {
+        background: var(--tui-bg-2) !important;
+        color: var(--tui-fg) !important;
+        border-color: var(--tui-border) !important;
+    }
+    ytd-menu-popup-renderer,
+    yt-contextual-sheet-layout {
+        border: 1px solid var(--tui-border) !important;
+    }
+    yt-list-item-view-model,
+    .yt-list-item-view-model,
+    .ytListItemViewModelHost,
+    ytd-menu-service-item-renderer,
+    ytd-menu-navigation-item-renderer {
+        color: var(--tui-fg) !important;
+        background: transparent !important;
+    }
+    .yt-list-item-view-model__title,
+    .ytListItemViewModelTitle,
+    yt-list-item-view-model yt-icon,
+    ytd-menu-service-item-renderer yt-icon,
+    ytd-menu-service-item-renderer .text {
+        color: var(--tui-fg) !important;
+        fill: var(--tui-fg) !important;
+    }
+    yt-list-item-view-model:hover,
+    .yt-list-item-view-model:hover,
+    .ytListItemViewModelHost:hover,
+    ytd-menu-service-item-renderer:hover,
+    ytd-menu-navigation-item-renderer:hover,
+    ytd-menu-service-item-renderer[focused],
+    ytd-menu-navigation-item-renderer[focused] {
+        background: var(--tui-bg-3) !important;
+        color: var(--tui-main) !important;
+    }
+
+    /* dialogs (share, etc.) */
+    tp-yt-paper-dialog,
+    ytd-unified-share-panel-renderer,
+    yt-share-panel-view-model,
+    yt-dialog-view-model,
+    .ytDialogViewModelHost,
+    yt-copy-link-renderer,
+    yt-third-party-network-section-renderer {
+        background-color: var(--tui-bg-2) !important;
+        color: var(--tui-fg) !important;
+        border: 1px solid var(--tui-border) !important;
+    }
+    ytd-unified-share-panel-renderer #title,
+    ytd-unified-share-panel-renderer .title,
+    yt-share-panel-view-model h2,
+    yt-share-target-renderer #title,
+    .yt-share-target-renderer {
+        color: var(--tui-fg) !important;
+    }
+    yt-copy-link-renderer #share-url,
+    yt-copy-link-renderer input,
+    yt-copy-link-renderer #copy-link,
+    yt-copy-link-renderer tp-yt-paper-input,
+    yt-copy-link-renderer .yt-copy-link-renderer {
+        background-color: var(--tui-bg) !important;
+        color: var(--tui-fg) !important;
+        border-color: var(--tui-border) !important;
+    }
+    yt-copy-link-renderer button,
+    yt-copy-link-renderer yt-button-renderer button {
+        background: var(--tui-bg-3) !important;
+        color: var(--tui-main) !important;
+        border: 1px solid var(--tui-border) !important;
+    }
+    tp-yt-paper-dialog yt-icon-button,
+    tp-yt-paper-dialog #close-button yt-icon {
+        color: var(--tui-fg-dim) !important;
+        fill: var(--tui-fg-dim) !important;
+    }
+    tp-yt-iron-overlay-backdrop.opened {
+        background-color: var(--tui-bg) !important;
+        opacity: 0.7 !important;
+    }
+
+    /* square hover/overlay shapes on icon buttons (e.g. video options "⋮") */
+    .yt-spec-touch-feedback-shape,
+    .yt-spec-touch-feedback-shape__stroke,
+    .yt-spec-touch-feedback-shape__fill,
+    .yt-spec-button-shape-next--icon-button,
+    .yt-spec-button-shape-next--size-m.yt-spec-button-shape-next--icon-button,
+    .yt-spec-button-shape-next--size-s.yt-spec-button-shape-next--icon-button,
+    .yt-spec-icon-badge-shape,
+    yt-icon-button,
+    yt-icon-button button,
+    ytd-menu-renderer yt-icon-button,
+    ytd-menu-renderer #button-shape button,
+    .yt-lockup-metadata-view-model-wiz__menu-button,
+    .yt-lockup-metadata-view-model__menu-button button,
+    .ytLockupMetadataViewModelMenuButton button {
+        border-radius: 0 !important;
+    }
+
+    /* square everything: hover shapes, buttons, player controls, avatars */
+    *,
+    *::before,
+    *::after {
+        border-radius: 0 !important;
+    }
+
     /* ─── TOOLTIPS ───────────────────────────────────────────────────── */
     #tooltip.tp-yt-paper-tooltip,
     yt-tooltip-renderer {
@@ -997,6 +1129,32 @@
     .reel-video-in-sequence-thumbnail.ytd-shorts {
         background-color: var(--tui-bg) !important;
     }
+    ytd-shorts,
+    #shorts-container,
+    #shorts-inner-container,
+    ytd-app:has(ytd-shorts[is-active]) {
+        scrollbar-width: none !important;
+    }
+    #navigation-button-up button,
+    #navigation-button-down button,
+    #navigation-button-up .yt-spec-button-shape-next,
+    #navigation-button-down .yt-spec-button-shape-next {
+        background-color: var(--tui-bg-3) !important;
+        color: var(--tui-fg) !important;
+        border: 1px solid var(--tui-border) !important;
+        border-radius: 0 !important;
+    }
+    #navigation-button-up button:hover,
+    #navigation-button-down button:hover {
+        background-color: var(--tui-bg-2) !important;
+        border-color: var(--tui-main) !important;
+        color: var(--tui-main) !important;
+    }
+    #navigation-button-up yt-icon,
+    #navigation-button-down yt-icon {
+        color: inherit !important;
+        fill: currentColor !important;
+    }
     *:focus-visible {
         outline: 1px solid var(--tui-main) !important;
         outline-offset: 2px !important;
@@ -1085,6 +1243,62 @@
     }
 
     /* ─── LIVE CHAT ──────────────────────────────────────────────────── */
+    /* chat lives in an iframe; these variables and rules apply inside it */
+    html {
+        --yt-live-chat-background-color: var(--tui-bg-2) !important;
+        --yt-live-chat-secondary-background-color: var(--tui-bg-2) !important;
+        --yt-live-chat-primary-text-color: var(--tui-fg) !important;
+        --yt-live-chat-secondary-text-color: var(--tui-fg-dim) !important;
+        --yt-live-chat-tertiary-text-color: var(--tui-fg-dim) !important;
+        --yt-live-chat-disabled-icon-button-color: var(--tui-fg-dim) !important;
+        --yt-live-chat-action-panel-background-color: var(--tui-bg-3) !important;
+        --yt-live-chat-header-background-color: var(--tui-bg-2) !important;
+        --yt-live-chat-header-text-color: var(--tui-fg) !important;
+        --yt-live-chat-picker-button-color: var(--tui-fg-dim) !important;
+        --yt-live-chat-text-input-field-background-color: var(--tui-bg-3) !important;
+        --yt-live-chat-text-input-field-placeholder-color: var(--tui-fg-dim) !important;
+        --yt-live-chat-toast-background-color: var(--tui-bg-3) !important;
+        --yt-live-chat-toast-text-color: var(--tui-fg) !important;
+        --yt-live-chat-mention-background-color: var(--tui-main) !important;
+        --yt-live-chat-mention-text-color: var(--tui-bg) !important;
+        --yt-live-chat-message-highlight-background-color: var(--tui-bg-3) !important;
+        --yt-live-chat-vem-background-color: var(--tui-bg-3) !important;
+        --yt-live-chat-moderator-color: var(--tui-main) !important;
+        --yt-live-chat-owner-color: var(--tui-main) !important;
+        --yt-live-chat-sponsor-color: var(--tui-main) !important;
+        --yt-live-chat-button-default-text-color: var(--tui-fg) !important;
+        --yt-live-chat-dialog-background-color: var(--tui-bg-3) !important;
+        --yt-live-chat-dialog-text-color: var(--tui-fg) !important;
+    }
+    yt-live-chat-renderer,
+    yt-live-chat-header-renderer,
+    yt-live-chat-message-input-renderer,
+    yt-live-chat-item-list-renderer,
+    #chat-messages,
+    #contents.yt-live-chat-renderer {
+        background-color: var(--tui-bg-2) !important;
+        border-color: var(--tui-border) !important;
+    }
+    yt-live-chat-text-message-renderer #author-name,
+    yt-live-chat-text-message-renderer #message {
+        color: var(--tui-fg) !important;
+    }
+    yt-live-chat-text-message-renderer #author-name {
+        color: var(--tui-fg-dim) !important;
+    }
+    yt-live-chat-text-message-renderer:hover {
+        background-color: var(--tui-bg-3) !important;
+    }
+    yt-live-chat-viewer-engagement-message-renderer {
+        background-color: var(--tui-bg-3) !important;
+        color: var(--tui-fg) !important;
+    }
+    yt-live-chat-message-input-renderer #input-container,
+    yt-live-chat-text-input-field-renderer {
+        background-color: var(--tui-bg-3) !important;
+        color: var(--tui-fg) !important;
+    }
+
     yt-live-chat-item-list-renderer #show-more,
     yt-live-chat-item-list-renderer #show-more button,
     yt-live-chat-item-list-renderer #show-more yt-icon {
