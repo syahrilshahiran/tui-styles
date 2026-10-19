@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           tui-youtube-rose-pine
 @namespace      github.com/syahrilshahiran/tui-styles
-@version        1.0.6
+@version        1.0.7
 @description    A TUI/terminal-style reskin of YouTube in Rosé Pine colors with adjusted typography.
 @author         syahrilshahiran
 @homepageURL    https://github.com/syahrilshahiran/tui-styles
@@ -555,6 +555,26 @@
         border-color: var(--tui-border) !important;
     }
 
+    /* new-style class names: call-to-action buttons (e.g. dialog "Report") */
+    button[class*="ytSpecButtonShapeNext"][class*="CallToAction"],
+    button[class*="ytSpecButtonShapeNext"][class*="CallToAction"] *,
+    a[class*="ytSpecButtonShapeNext"][class*="CallToAction"] {
+        color: var(--tui-main) !important;
+    }
+    button[class*="ytSpecButtonShapeNext"][class*="CallToAction"][class*="Text"]:hover {
+        background-color: var(--tui-bg-3) !important;
+    }
+    button[class*="ytSpecButtonShapeNext"][class*="CallToAction"][disabled],
+    button[class*="ytSpecButtonShapeNext"][class*="CallToAction"][aria-disabled="true"],
+    button[class*="ytSpecButtonShapeNext"][class*="CallToAction"][disabled] *,
+    button[class*="ytSpecButtonShapeNext"][class*="CallToAction"][aria-disabled="true"] * {
+        color: var(--rp-muted) !important;
+    }
+    tp-yt-paper-dialog button[class*="ytSpecButtonShapeNext"][class*="Text"]:not([class*="Mono"]):not([disabled]):not([aria-disabled="true"]),
+    tp-yt-paper-dialog button[class*="ytSpecButtonShapeNext"][class*="Text"]:not([class*="Mono"]):not([disabled]):not([aria-disabled="true"]) * {
+        color: var(--tui-main) !important;
+    }
+
     .yt-spec-button-shape-next--mono.yt-spec-button-shape-next--text {
         color: var(--tui-fg-dim) !important;
     }
@@ -580,10 +600,24 @@
         fill: transparent !important;
     }
 
-    like-button-view-model toggle-button-view-model[aria-pressed="true"] svg path,
-    dislike-button-view-model toggle-button-view-model[aria-pressed="true"] svg path {
+    /* pressed (liked / disliked): accent border, text, tinted bg, filled icon */
+    like-button-view-model button[aria-pressed="true"],
+    dislike-button-view-model button[aria-pressed="true"] {
+        background-color: var(--tui-bg-3) !important;
+        border: 1px solid var(--tui-main) !important;
+        color: var(--tui-main) !important;
+    }
+    like-button-view-model button[aria-pressed="true"] svg path,
+    dislike-button-view-model button[aria-pressed="true"] svg path,
+    like-button-view-model button[aria-pressed="true"] svg,
+    dislike-button-view-model button[aria-pressed="true"] svg {
         fill: var(--tui-main) !important;
         stroke: var(--tui-main) !important;
+        color: var(--tui-main) !important;
+    }
+    like-button-view-model button[aria-pressed="true"] .ytSpecButtonShapeNextButtonTextContent,
+    like-button-view-model button[aria-pressed="true"] .yt-spec-button-shape-next__button-text-content {
+        color: var(--tui-main) !important;
     }
 
     .yt-spec-button-shape-next--mono.yt-spec-button-shape-next--filled .yt-icon,
@@ -663,6 +697,118 @@
     }
     ytd-watch-metadata[clickable-description][description-collapsed] #description.ytd-watch-metadata:hover {
         background: var(--tui-bg-3) !important;
+    }
+    /* description: expanded state, inner wrappers, inline link chips */
+    ytd-watch-metadata #description,
+    ytd-watch-metadata #description-inner,
+    ytd-watch-metadata #description-inline-expander,
+    ytd-text-inline-expander,
+    ytd-text-inline-expander #snippet,
+    ytd-text-inline-expander #expanded,
+    ytd-text-inline-expander #attributed-snippet-text,
+    yt-attributed-string.ytd-text-inline-expander {
+        background-color: transparent !important;
+        color: var(--tui-fg) !important;
+        --yt-spec-text-primary: var(--tui-fg) !important;
+        --yt-spec-text-secondary: var(--tui-fg-dim) !important;
+        --yt-spec-badge-chip-background: var(--tui-bg-3) !important;
+        --yt-spec-static-brand-red: var(--tui-main) !important;
+    }
+    ytd-watch-metadata #description.ytd-watch-metadata:not([description-collapsed]),
+    ytd-watch-metadata[description-collapsed] #description.ytd-watch-metadata,
+    ytd-watch-metadata[modern-metapanel] #description.ytd-watch-metadata {
+        background: var(--tui-bg-2) !important;
+        background-image: none !important;
+        border: 1px solid var(--tui-border) !important;
+    }
+    ytd-watch-metadata[clickable-description][description-collapsed] #description.ytd-watch-metadata:hover,
+    ytd-watch-metadata #description.ytd-watch-metadata:hover {
+        background: var(--tui-bg-3) !important;
+        border-color: var(--tui-main) !important;
+    }
+    ytd-watch-metadata #description .yt-core-attributed-string--link-inherit-color,
+    ytd-watch-metadata #description .yt-core-attributed-string__link--display-type,
+    #description .yt-core-attributed-string__link--call-to-action-color {
+        background-color: var(--tui-bg-3) !important;
+        color: var(--tui-main) !important;
+    }
+    ytd-text-inline-expander #expand,
+    ytd-text-inline-expander #collapse,
+    #expand.ytd-text-inline-expander,
+    #collapse.ytd-text-inline-expander {
+        color: var(--tui-fg-dim) !important;
+    }
+
+    /* action bar: share / ask / save / more */
+    ytd-watch-metadata #actions yt-button-view-model button,
+    ytd-watch-metadata #actions button-view-model button,
+    ytd-watch-metadata #actions .yt-spec-button-shape-next,
+    ytd-watch-metadata #actions yt-button-shape button,
+    ytd-watch-metadata #actions ytd-menu-renderer button,
+    ytd-watch-metadata #top-level-buttons-computed button {
+        background-color: var(--tui-bg-2) !important;
+        border: 1px solid var(--tui-border) !important;
+        color: var(--tui-fg) !important;
+        box-shadow: none !important;
+    }
+    ytd-watch-metadata #actions yt-button-view-model button:hover,
+    ytd-watch-metadata #actions button-view-model button:hover,
+    ytd-watch-metadata #actions .yt-spec-button-shape-next:hover,
+    ytd-watch-metadata #actions yt-button-shape button:hover,
+    ytd-watch-metadata #actions ytd-menu-renderer button:hover,
+    ytd-watch-metadata #top-level-buttons-computed button:hover,
+    segmented-like-dislike-button-view-model:hover,
+    [class*="like-button-view-model"] button:hover,
+    [class*="dislike-button-view-model"] button:hover {
+        background-color: var(--tui-bg-3) !important;
+        border-color: var(--tui-main) !important;
+        color: var(--tui-main) !important;
+    }
+    ytd-watch-metadata #actions .yt-spec-button-shape-next__icon,
+    ytd-watch-metadata #actions yt-icon,
+    ytd-watch-metadata #actions yt-icon svg {
+        color: inherit !important;
+        fill: currentColor !important;
+    }
+    ytd-watch-metadata #actions button:hover .yt-spec-button-shape-next__icon,
+    ytd-watch-metadata #actions button:hover yt-icon {
+        color: var(--tui-main) !important;
+    }
+    /* button focus/hover overlay shapes should not tint */
+    ytd-watch-metadata #actions .yt-spec-touch-feedback-shape__fill {
+        background-color: transparent !important;
+    }
+
+    /* engagement panel: video details list + blue buttons */
+    ytd-engagement-panel-section-list-renderer,
+    ytd-engagement-panel-section-list-renderer #content,
+    yt-video-attribute-view-model,
+    .ytVideoDetailsViewModelHost,
+    [class*="ytVideoDetails"] {
+        --yt-spec-base-background: var(--tui-bg) !important;
+        --yt-spec-raised-background: var(--tui-bg-2) !important;
+        --yt-spec-themed-blue: var(--tui-main) !important;
+        --yt-spec-call-to-action: var(--tui-main) !important;
+    }
+    ytd-engagement-panel-section-list-renderer yt-list-view-model,
+    ytd-engagement-panel-section-list-renderer yt-list-view-model *,
+    ytd-engagement-panel-section-list-renderer yt-list-item-view-model,
+    ytd-engagement-panel-section-list-renderer yt-list-item-view-model *,
+    ytd-engagement-panel-section-list-renderer yt-list-item-view-model:hover,
+    ytd-engagement-panel-section-list-renderer yt-list-item-view-model:hover *,
+    ytd-structured-description-content-renderer yt-list-view-model,
+    ytd-structured-description-content-renderer yt-list-view-model *,
+    ytd-structured-description-content-renderer yt-list-item-view-model:hover,
+    ytd-structured-description-content-renderer yt-list-item-view-model:hover * {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+    }
+    .yt-spec-button-shape-next--call-to-action.yt-spec-button-shape-next--outline,
+    .yt-spec-button-shape-next--call-to-action.yt-spec-button-shape-next--tonal,
+    .yt-spec-button-shape-next--call-to-action.yt-spec-button-shape-next--text {
+        color: var(--tui-main) !important;
     }
     #description a,
     .yt-core-attributed-string__link--call-to-action-color {
@@ -909,7 +1055,8 @@
         color: var(--tui-main) !important;
     }
 
-    /* dialogs (share, etc.) */
+    /* ─── DIALOGS ────────────────────────────────────────────────────── */
+    /* share dialog */
     tp-yt-paper-dialog,
     ytd-unified-share-panel-renderer,
     yt-share-panel-view-model,
@@ -948,12 +1095,296 @@
         color: var(--tui-fg-dim) !important;
         fill: var(--tui-fg-dim) !important;
     }
+
+    /* collaborators dialog */
+    yt-sheet-view-model,
+    yt-panel-view-model,
+    yt-dialog-view-model,
+    yt-contextual-sheet-layout,
+    .ytSheetViewModelHost,
+    .ytContextualSheetLayoutContentContainer,
+    .ytDialogViewModelHost,
+    .ytDialogViewModelContent {
+        background: var(--tui-bg-2) !important;
+        color: var(--tui-fg) !important;
+        --yt-spec-base-background: var(--tui-bg-2) !important;
+        --yt-spec-raised-background: var(--tui-bg-2) !important;
+        --yt-spec-menu-background: var(--tui-bg-2) !important;
+        --yt-spec-text-primary: var(--tui-fg) !important;
+        --yt-spec-text-secondary: var(--tui-fg-dim) !important;
+    }
+    yt-sheet-view-model yt-list-item-view-model,
+    yt-sheet-view-model .ytListItemViewModelHost,
+    yt-dialog-view-model yt-list-item-view-model,
+    yt-dialog-view-model .ytListItemViewModelHost,
+    yt-contextual-sheet-layout yt-list-item-view-model,
+    yt-contextual-sheet-layout .ytListItemViewModelHost,
+    yt-contextual-sheet-layout .ytListItemViewModelContent,
+    yt-contextual-sheet-layout .ytListItemViewModelContentContainer {
+        background: var(--tui-bg) !important;
+        background-image: none !important;
+        border: 1px solid var(--tui-border) !important;
+        color: var(--tui-fg) !important;
+        box-shadow: none !important;
+    }
+    yt-contextual-sheet-layout .ytListItemViewModelTitle,
+    yt-contextual-sheet-layout .yt-list-item-view-model__title,
+    yt-contextual-sheet-layout .ytContentMetadataViewModelHost a,
+    yt-dialog-view-model .ytListItemViewModelTitle {
+        color: var(--tui-main) !important;
+    }
+    yt-contextual-sheet-layout .ytListItemViewModelSubtitle,
+    yt-contextual-sheet-layout .yt-list-item-view-model__subtitle,
+    yt-contextual-sheet-layout .ytContentMetadataViewModelMetadataText,
+    yt-dialog-view-model .ytListItemViewModelSubtitle {
+        color: var(--tui-fg-dim) !important;
+    }
+    yt-contextual-sheet-layout yt-subscribe-button-view-model button,
+    yt-contextual-sheet-layout .yt-spec-button-shape-next,
+    yt-sheet-view-model yt-subscribe-button-view-model button,
+    yt-sheet-view-model .yt-spec-button-shape-next,
+    yt-dialog-view-model yt-subscribe-button-view-model button,
+    yt-dialog-view-model .yt-spec-button-shape-next {
+        background-color: var(--tui-bg-2) !important;
+        border: 1px solid var(--tui-border) !important;
+        color: var(--tui-fg) !important;
+        box-shadow: none !important;
+    }
+    yt-contextual-sheet-layout yt-subscribe-button-view-model button:hover,
+    yt-contextual-sheet-layout .yt-spec-button-shape-next:hover,
+    yt-sheet-view-model yt-subscribe-button-view-model button:hover,
+    yt-sheet-view-model .yt-spec-button-shape-next:hover,
+    yt-dialog-view-model yt-subscribe-button-view-model button:hover,
+    yt-dialog-view-model .yt-spec-button-shape-next:hover {
+        background-color: var(--tui-bg-3) !important;
+        color: var(--tui-main) !important;
+    }
+
+    /* report flow (video + comment report dialogs) */
+    tp-yt-paper-dialog ytd-engagement-panel-section-list-renderer,
+    tp-yt-paper-dialog ytd-engagement-panel-section-list-renderer > div,
+    tp-yt-paper-dialog ytd-flow-root-renderer,
+    tp-yt-paper-dialog ytd-flow-step-renderer,
+    tp-yt-paper-dialog ytd-flow-top-bar-renderer,
+    tp-yt-paper-dialog ytd-flow-step-renderer > div,
+    tp-yt-paper-dialog tp-yt-paper-dialog-scrollable,
+    tp-yt-paper-dialog .scrollable.tp-yt-paper-dialog-scrollable,
+    tp-yt-paper-dialog [class*="ReportForm"],
+    tp-yt-paper-dialog [class*="reportForm"] {
+        background: var(--tui-bg-2) !important;
+        background-color: var(--tui-bg-2) !important;
+        color: var(--tui-fg) !important;
+        --yt-spec-base-background: var(--tui-bg-2) !important;
+        --yt-spec-raised-background: var(--tui-bg-2) !important;
+        --yt-spec-text-primary: var(--tui-fg) !important;
+        --yt-spec-text-secondary: var(--tui-fg-dim) !important;
+        --yt-spec-call-to-action: var(--tui-main) !important;
+        --yt-spec-themed-blue: var(--tui-main) !important;
+        --yt-spec-outline: var(--tui-border) !important;
+        --yt-spec-icon-inactive: var(--tui-fg-dim) !important;
+    }
+    tp-yt-paper-dialog ytd-flow-step-renderer [class*="Description"],
+    tp-yt-paper-dialog ytd-flow-step-renderer [class*="Subtitle"],
+    tp-yt-paper-dialog ytd-flow-step-renderer [class*="BodyText"] {
+        color: var(--tui-fg-dim) !important;
+    }
+    /* checkboxes / radios in report flow */
+    tp-yt-paper-dialog ytd-flow-step-renderer input[type="checkbox"],
+    tp-yt-paper-dialog ytd-flow-step-renderer input[type="radio"],
+    tp-yt-paper-dialog [class*="Checkbox"] [class*="Box"],
+    tp-yt-paper-dialog [class*="Radio"] [class*="Circle"],
+    tp-yt-paper-dialog [class*="ReportForm"] [class*="Checkbox"],
+    tp-yt-paper-dialog [class*="ReportForm"] [class*="Radio"] {
+        accent-color: var(--tui-main) !important;
+        border-color: var(--tui-fg-dim) !important;
+        background-color: var(--tui-bg) !important;
+        color: var(--tui-main) !important;
+    }
+    tp-yt-paper-dialog ytd-flow-step-renderer input:checked,
+    tp-yt-paper-dialog [class*="Checked"] [class*="Box"],
+    tp-yt-paper-dialog [class*="Checked"] [class*="Circle"] {
+        background-color: var(--tui-main) !important;
+        border-color: var(--tui-main) !important;
+    }
+    tp-yt-paper-dialog ytd-flow-step-renderer svg,
+    tp-yt-paper-dialog ytd-flow-step-renderer yt-icon {
+        color: var(--tui-fg-dim) !important;
+        fill: var(--tui-fg-dim) !important;
+    }
+    /* report flow buttons (Report / Cancel / Next / Sign in) */
+    tp-yt-paper-dialog ytd-flow-step-renderer button,
+    tp-yt-paper-dialog ytd-flow-step-renderer a.ytSpecButtonShapeNextHost,
+    tp-yt-paper-dialog ytd-flow-root-renderer button.ytSpecButtonShapeNextHost,
+    tp-yt-paper-dialog [class*="ReportFormBottomBar"] button,
+    tp-yt-paper-dialog [class*="BottomBar"] button {
+        background-color: var(--tui-bg-3) !important;
+        border: 1px solid var(--tui-main) !important;
+        color: var(--tui-main) !important;
+        box-shadow: none !important;
+    }
+    tp-yt-paper-dialog ytd-flow-step-renderer button[disabled],
+    tp-yt-paper-dialog ytd-flow-step-renderer button[aria-disabled="true"],
+    tp-yt-paper-dialog [class*="BottomBar"] button[disabled],
+    tp-yt-paper-dialog [class*="BottomBar"] button[aria-disabled="true"] {
+        background-color: var(--tui-bg-2) !important;
+        border-color: var(--tui-border) !important;
+        color: var(--rp-muted) !important;
+    }
+    tp-yt-paper-dialog ytd-flow-step-renderer button:not([disabled]):not([aria-disabled="true"]):hover,
+    tp-yt-paper-dialog [class*="BottomBar"] button:not([disabled]):not([aria-disabled="true"]):hover {
+        background-color: var(--tui-main) !important;
+        color: var(--tui-bg) !important;
+    }
+    tp-yt-paper-dialog [class*="BottomBar"] button[class*="Text"],
+    tp-yt-paper-dialog [class*="BottomBar"] button[class*="Text"]:hover {
+        border: 0 !important;
+        background: transparent !important;
+    }
+    tp-yt-paper-dialog [class*="BottomBar"] button[class*="Text"] {
+        color: var(--tui-fg) !important;
+    }
+    tp-yt-paper-dialog [class*="ReportFormBottomBar"] .ytSpecTouchFeedbackShapeFill,
+    tp-yt-paper-dialog ytd-flow-step-renderer .ytSpecTouchFeedbackShapeFill,
+    tp-yt-paper-dialog ytd-flow-step-renderer .contribYtLightShapeStaticWashLight {
+        background-color: transparent !important;
+    }
+
+    /* any other popup dialog (e.g. "Report image or title"): no stray dark layers.
+       :where() keeps specificity at the dialog itself so specific rules still win */
+    tp-yt-paper-dialog {
+        background: var(--tui-bg-2) !important;
+        --yt-spec-base-background: var(--tui-bg-2) !important;
+        --yt-spec-raised-background: var(--tui-bg-2) !important;
+        --yt-spec-menu-background: var(--tui-bg-2) !important;
+        --yt-spec-text-primary: var(--tui-fg) !important;
+        --yt-spec-text-secondary: var(--tui-fg-dim) !important;
+        --yt-spec-call-to-action: var(--tui-main) !important;
+        --yt-spec-themed-blue: var(--tui-main) !important;
+        --yt-spec-outline: var(--tui-border) !important;
+    }
+    tp-yt-paper-dialog :where(*:not(button):not(input):not(img):not(svg):not(path):not(yt-icon):not(yt-touch-feedback-shape):not([class*="TouchFeedback"]):not([class*="LightShape"]):not([class*="Checkbox"]):not([class*="checkbox"]):not([class*="Radio"]):not([class*="radio"]):not(#radioContainer):not(#checkboxContainer):not(#checkbox)) {
+        background-color: transparent !important;
+        background-image: none !important;
+    }
+    tp-yt-paper-dialog :where([class*="Checkbox"], [class*="checkbox"], #checkbox) {
+        border-color: var(--tui-fg-dim) !important;
+    }
+    tp-yt-paper-dialog :where(tp-yt-paper-checkbox[checked] #checkbox, [aria-checked="true"] [class*="Checkbox"], [aria-checked="true"] #checkbox) {
+        background-color: var(--tui-main) !important;
+        border-color: var(--tui-main) !important;
+    }
+    tp-yt-paper-dialog :where(tp-yt-paper-checkbox, tp-yt-paper-radio-button) {
+        --paper-checkbox-unchecked-color: var(--tui-fg-dim) !important;
+        --paper-checkbox-checked-color: var(--tui-main) !important;
+        --paper-checkbox-label-color: var(--tui-fg) !important;
+        --paper-radio-button-unchecked-color: var(--tui-fg-dim) !important;
+        --paper-radio-button-checked-color: var(--tui-main) !important;
+    }
     tp-yt-iron-overlay-backdrop.opened {
         background-color: var(--tui-bg) !important;
         opacity: 0.7 !important;
     }
 
-    /* square hover/overlay shapes on icon buttons (e.g. video options "⋮") */
+    /* ─── SHARE PANEL ────────────────────────────────────────────────── */
+    /* scroll buttons (yt-icon-button.scroll-button) */
+    tp-yt-paper-dialog yt-icon-button.scroll-button,
+    yt-third-party-share-target-section-renderer yt-icon-button.scroll-button,
+    yt-third-party-share-target-section-renderer #scroll-button-back,
+    yt-third-party-share-target-section-renderer #scroll-button-forward {
+        background-color: var(--tui-bg-2) !important;
+        border: 1px solid var(--tui-border) !important;
+        border-radius: 0 !important;
+        color: var(--tui-fg) !important;
+        box-shadow: none !important;
+    }
+    tp-yt-paper-dialog yt-icon-button.scroll-button:hover {
+        background-color: var(--tui-bg-3) !important;
+        border-color: var(--tui-main) !important;
+        color: var(--tui-main) !important;
+    }
+    tp-yt-paper-dialog yt-icon-button.scroll-button yt-icon {
+        color: inherit !important;
+        fill: currentColor !important;
+    }
+
+    /* share dialog: only the outer dialog keeps a border; nested panels stay flat */
+    ytd-unified-share-panel-renderer,
+    yt-share-panel-view-model,
+    yt-dialog-view-model,
+    .ytDialogViewModelHost,
+    yt-copy-link-renderer,
+    yt-third-party-network-section-renderer,
+    yt-third-party-share-target-section-renderer,
+    yt-third-party-network-section-renderer #contents,
+    ytd-unified-share-panel-renderer #contents,
+    ytd-unified-share-panel-renderer #container,
+    tp-yt-paper-dialog yt-icon-button.scroll-button,
+    yt-third-party-share-target-section-renderer yt-icon-button.scroll-button {
+        border: 0 !important;
+    }
+    yt-copy-link-renderer {
+        background: transparent !important;
+    }
+
+    /* ─── DOWNLOADS / PREMIUM PROMO ──────────────────────────────────── */
+    /* ytd-statement-banner-renderer */
+    ytd-statement-banner-renderer #background-content,
+    ytd-statement-banner-renderer #dismissible,
+    ytd-statement-banner-renderer #statement-banner-content,
+    ytd-statement-banner-renderer #foreground-content {
+        background-color: var(--tui-bg-2) !important;
+        background-image: none !important;
+    }
+    ytd-statement-banner-renderer #statement-banner-content,
+    ytd-statement-banner-renderer #tile-container,
+    ytd-statement-banner-renderer #tile-lottie,
+    ytd-statement-banner-renderer .showcase-image {
+        border: 0 !important;
+        outline: 0 !important;
+    }
+    ytd-statement-banner-renderer #background-lottie {
+        display: none !important;
+    }
+    ytd-statement-banner-renderer #dynamic-title,
+    ytd-statement-banner-renderer #dynamic-title yt-formatted-string,
+    ytd-statement-banner-renderer #dynamic-title .dynamic-text-container {
+        color: var(--tui-fg) !important;
+    }
+    ytd-statement-banner-renderer #subtitle,
+    ytd-statement-banner-renderer #supplemental-text {
+        color: var(--tui-fg-dim) !important;
+    }
+    ytd-statement-banner-renderer #supplemental-text a {
+        color: var(--tui-main) !important;
+    }
+    ytd-statement-banner-renderer #tile-image,
+    ytd-statement-banner-renderer #tile-image img {
+        border-radius: 0 !important;
+        border: 0 !important;
+    }
+    ytd-statement-banner-renderer #primary-button a,
+    ytd-statement-banner-renderer #primary-button a * {
+        color: var(--tui-bg) !important;
+    }
+    ytd-statement-banner-renderer #primary-button a {
+        background-color: var(--tui-main) !important;
+        border: 1px solid var(--tui-main) !important;
+        box-shadow: none !important;
+    }
+    ytd-statement-banner-renderer #primary-button a:hover {
+        background-color: var(--tui-bg-3) !important;
+    }
+    ytd-statement-banner-renderer #primary-button a:hover * {
+        color: var(--tui-main) !important;
+    }
+    ytd-statement-banner-renderer #secondary-button a {
+        background-color: var(--tui-bg-2) !important;
+        border: 1px solid var(--tui-border) !important;
+        color: var(--tui-fg) !important;
+    }
+
+    /* ─── SQUARE SHAPES ──────────────────────────────────────────────── */
+    /* hover/overlay shapes on icon buttons (e.g. video options "⋮") */
     .yt-spec-touch-feedback-shape,
     .yt-spec-touch-feedback-shape__stroke,
     .yt-spec-touch-feedback-shape__fill,
@@ -971,10 +1402,32 @@
         border-radius: 0 !important;
     }
 
-    /* square everything: hover shapes, buttons, player controls, avatars */
+    /* everything else: hover shapes, buttons, player controls, avatars */
     *,
     *::before,
     *::after {
+        border-radius: 0 !important;
+    }
+
+    /* new-style button class names */
+    [class*="ytSpecButtonShapeNext"],
+    [class*="ytSpecButtonShapeNext"]::before,
+    [class*="ytSpecButtonShapeNext"]::after,
+    [class*="ytSpecTouchFeedbackShape"],
+    [class*="ytSpecTouchFeedbackShape"]::before,
+    [class*="ytSpecTouchFeedbackShape"]::after {
+        border-radius: 0 !important;
+        clip-path: none !important;
+    }
+    .ytSpecTouchFeedbackShapeFill {
+        background-color: var(--tui-bg-3) !important;
+    }
+
+    /* no hover backdrop behind the "⋮" on videos */
+    .ytLockupMetadataViewModelMenuButton::before,
+    .ytLockupMetadataViewModelMenuButton::after {
+        background: none !important;
+        background-image: none !important;
         border-radius: 0 !important;
     }
 
@@ -1116,7 +1569,12 @@
     /* ─── SHORTS PLAYER ──────────────────────────────────────────────── */
     ytd-shorts,
     #shorts-container.ytd-shorts,
-    #shorts-inner-container.ytd-shorts {
+    #shorts-inner-container.ytd-shorts,
+    ytd-shorts .navigation-container,
+    ytd-shorts #navigation-container,
+    ytd-shorts .navigation-button,
+    ytd-shorts #navigation-button-up,
+    ytd-shorts #navigation-button-down {
         background-color: var(--tui-bg) !important;
     }
     /* cinematic ambience is already off on the watch page; same here.
