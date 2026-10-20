@@ -695,4 +695,23 @@
         color: var(--rp-base) !important;
         background-color: var(--tui-main) !important;
     }
+
+    /* ── Code viewer: its hidden selection textarea must stay invisible ── */
+    textarea#read-only-cursor-text-area,
+    textarea[aria-readonly="true"] {
+        color: transparent !important;
+        background: transparent !important;
+        border: none !important;
+        caret-color: var(--tui-main) !important;
+    }
+    textarea#read-only-cursor-text-area::selection,
+    textarea[aria-readonly="true"]::selection {
+        color: transparent !important;
+        background: unquote("color-mix(in srgb, var(--tui-main) 35%, transparent)") !important;
+    }
+    textarea#read-only-cursor-text-area::-moz-selection,
+    textarea[aria-readonly="true"]::-moz-selection {
+        color: transparent !important;
+        background: unquote("color-mix(in srgb, var(--tui-main) 35%, transparent)") !important;
+    }
 }
