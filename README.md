@@ -50,3 +50,13 @@ A minimalist text-focused Spotify theme for Spicetify.
 https://github.com/spicetify/spicetify-themes/tree/master/text
 
 ---
+
+### Firefox — textfox
+
+A userChrome.css theme that gives Firefox a TUI-style look.
+
+**Repository**
+
+https://github.com/adriankarlen/textfox
+
+---
