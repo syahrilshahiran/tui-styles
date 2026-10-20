@@ -1,0 +1,698 @@
+/* ==UserStyle==
+@name           tui-github-rose-pine
+@namespace      github.com/syahrilshahiran/tui-styles
+@version        1.0.0
+@description    A TUI/terminal-style reskin of GitHub in Rosé Pine colors with adjusted typography.
+@author         syahrilshahiran
+@homepageURL    https://github.com/syahrilshahiran/tui-styles
+@license        MIT
+@preprocessor   stylus
+
+@var select tui-style "Preset Theme" [
+    "Rose-Pine",
+    "Rose-Pine-Moon",
+    "Rose-Pine-Dawn"
+]
+@var select tui-accent "Accent color" [
+    "Love",
+    "Gold",
+    "Rose",
+    "Pine",
+    "Foam",
+    "Iris"
+]
+==/UserStyle== */
+@-moz-document regexp("https:\/\/(gist\.)*github\.com(?!((\/.+?\/.+?\/commit\/[A-Fa-f0-9]+\.(patch|diff)$)|\/home$|\/features($|\/.*)|\/marketplace($|\?.*|\/.*)|\/organizations\/plan)).*$") {
+    @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap");
+
+    /* ─── ROSE PINE PALETTE ──────────────────────────────────────────── */
+    :root {
+        if tui-style == "Rose-Pine" {
+            --rp-base: #191724;
+            --rp-surface: #1f1d2e;
+            --rp-overlay: #26233a;
+            --rp-muted: #6e6a86;
+            --rp-subtle: #908caa;
+            --rp-text: #e0def4;
+            --rp-love: #eb6f92;
+            --rp-gold: #f6c177;
+            --rp-rose: #ebbcba;
+            --rp-pine: #31748f;
+            --rp-foam: #9ccfd8;
+            --rp-iris: #c4a7e7;
+            --rp-hl-low: #21202e;
+            --rp-hl-med: #403d52;
+            --rp-hl-high: #524f67;
+            color-scheme: dark;
+        }
+        else if tui-style == "Rose-Pine-Moon" {
+            --rp-base: #232136;
+            --rp-surface: #2a273f;
+            --rp-overlay: #393552;
+            --rp-muted: #6e6a86;
+            --rp-subtle: #908caa;
+            --rp-text: #e0def4;
+            --rp-love: #eb6f92;
+            --rp-gold: #f6c177;
+            --rp-rose: #ea9a97;
+            --rp-pine: #3e8fb0;
+            --rp-foam: #9ccfd8;
+            --rp-iris: #c4a7e7;
+            --rp-hl-low: #2a283e;
+            --rp-hl-med: #44415a;
+            --rp-hl-high: #56526e;
+            color-scheme: dark;
+        }
+        else if tui-style == "Rose-Pine-Dawn" {
+            --rp-base: #faf4ed;
+            --rp-surface: #fffaf3;
+            --rp-overlay: #f2e9e1;
+            --rp-muted: #9893a5;
+            --rp-subtle: #797593;
+            --rp-text: #575279;
+            --rp-love: #b4637a;
+            --rp-gold: #ea9d34;
+            --rp-rose: #d7827e;
+            --rp-pine: #286983;
+            --rp-foam: #56949f;
+            --rp-iris: #907aa9;
+            --rp-hl-low: #f4ede8;
+            --rp-hl-med: #dfdad9;
+            --rp-hl-high: #cecacd;
+            color-scheme: light;
+        }
+
+        /* Semantic TUI Mapping */
+        if tui-accent == "Gold" {
+            --tui-main: var(--rp-gold);
+        } else if tui-accent == "Rose" {
+            --tui-main: var(--rp-rose);
+        } else if tui-accent == "Pine" {
+            --tui-main: var(--rp-pine);
+        } else if tui-accent == "Foam" {
+            --tui-main: var(--rp-foam);
+        } else if tui-accent == "Iris" {
+            --tui-main: var(--rp-iris);
+        } else {
+            --tui-main: var(--rp-love);
+        }
+
+        /* Link color; swap to iris when the accent is foam so hover stays visible */
+        if tui-accent == "Foam" {
+            --tui-link: var(--rp-iris);
+        } else {
+            --tui-link: var(--rp-foam);
+        }
+    }
+
+    /* ─── GITHUB INTERNAL VARIABLE OVERRIDES ────────────────────────── */
+    html[data-color-mode][data-light-theme][data-dark-theme] {
+        --color-social-reaction-bg-reacted-hover: unquote("color-mix(in srgb, var(--tui-main) 30%, transparent)") !important;
+        --color-notifications-button-hover-bg: unquote("color-mix(in srgb, var(--tui-main) 60%, transparent)") !important;
+        --page-header-bgColor: var(--rp-base) !important;
+
+        --diffBlob-addition-fgColor-text: var(--rp-text);
+        --diffBlob-addition-fgColor-num: var(--rp-text);
+        --diffBlob-addition-bgColor-num: unquote("color-mix(in srgb, var(--rp-foam) 30%, transparent)");
+        --diffBlob-addition-bgColor-line: unquote("color-mix(in srgb, var(--rp-foam) 15%, transparent)");
+        --diffBlob-addition-bgColor-word: unquote("color-mix(in srgb, var(--rp-foam) 30%, transparent)");
+        --diffBlob-deletion-fgColor-text: var(--rp-text);
+        --diffBlob-deletion-fgColor-num: var(--rp-text);
+        --diffBlob-deletion-bgColor-num: unquote("color-mix(in srgb, var(--rp-love) 30%, transparent)");
+        --diffBlob-deletion-bgColor-line: unquote("color-mix(in srgb, var(--rp-love) 15%, transparent)");
+        --diffBlob-deletion-bgColor-word: unquote("color-mix(in srgb, var(--rp-love) 30%, transparent)");
+        --diffBlob-hunk-bgColor-num: unquote("color-mix(in srgb, var(--tui-main) 40%, transparent)") !important;
+
+        --codeMirror-fgColor: var(--rp-text);
+        --codeMirror-bgColor: var(--rp-base);
+        --codeMirror-gutters-bgColor: var(--rp-base);
+        --codeMirror-gutterMarker-fgColor-default: var(--rp-base);
+        --codeMirror-gutterMarker-fgColor-muted: var(--rp-muted);
+        --codeMirror-lineNumber-fgColor: var(--rp-muted);
+        --codeMirror-cursor-fgColor: var(--tui-main);
+        --codeMirror-selection-bgColor: unquote("color-mix(in srgb, var(--tui-main) 25%, transparent)");
+        --codeMirror-activeline-bgColor: var(--rp-hl-low);
+        --codeMirror-matchingBracket-fgColor: var(--rp-text);
+        --codeMirror-lines-bgColor: var(--rp-base);
+        --codeMirror-syntax-fgColor-comment: var(--rp-muted);
+        --codeMirror-syntax-fgColor-constant: var(--rp-pine);
+        --codeMirror-syntax-fgColor-entity: var(--rp-pine);
+        --codeMirror-syntax-fgColor-keyword: var(--rp-iris);
+        --codeMirror-syntax-fgColor-storage: var(--rp-rose);
+        --codeMirror-syntax-fgColor-string: var(--rp-foam);
+        --codeMirror-syntax-fgColor-support: var(--rp-foam);
+        --codeMirror-syntax-fgColor-variable: var(--rp-rose);
+
+        --header-fgColor-default: var(--rp-text) !important;
+        --header-fgColor-logo: var(--tui-main) !important;
+        --header-bgColor: var(--rp-surface) !important;
+        --header-borderColor-divider: var(--rp-overlay) !important;
+        --headerSearch-bgColor: var(--rp-base) !important;
+        --headerSearch-borderColor: var(--rp-overlay) !important;
+
+        --avatar-bgColor: var(--rp-overlay);
+        --avatar-borderColor: var(--rp-overlay);
+        --avatar-shadow: none;
+        --avatarStack-fade-bgColor-default: var(--rp-overlay);
+        --avatarStack-fade-bgColor-muted: var(--rp-surface);
+
+        --control-bgColor-rest: var(--rp-surface) !important;
+        --control-bgColor-hover: var(--rp-overlay) !important;
+        --control-bgColor-active: var(--rp-hl-med) !important;
+        --control-bgColor-disabled: unquote("color-mix(in srgb, var(--rp-base) 60%, transparent)") !important;
+        --control-bgColor-selected: var(--rp-base) !important;
+        --control-fgColor-rest: var(--rp-text) !important;
+        --control-fgColor-placeholder: var(--rp-muted) !important;
+        --control-fgColor-disabled: var(--rp-muted) !important;
+        --control-borderColor-rest: var(--rp-overlay) !important;
+        --control-borderColor-emphasis: var(--rp-subtle) !important;
+        --control-borderColor-disabled: unquote("color-mix(in srgb, var(--rp-overlay) 75%, transparent)") !important;
+        --control-borderColor-selected: var(--rp-text) !important;
+        --control-borderColor-success: var(--rp-foam) !important;
+        --control-borderColor-danger: var(--rp-love) !important;
+        --control-borderColor-warning: var(--rp-gold) !important;
+        --control-iconColor-rest: var(--rp-muted);
+        --control-transparent-bgColor-rest: transparent;
+        --control-transparent-bgColor-hover: unquote("color-mix(in srgb, var(--rp-overlay) 40%, transparent)");
+        --control-transparent-bgColor-active: unquote("color-mix(in srgb, var(--rp-muted) 30%, transparent)");
+        --control-transparent-bgColor-selected: unquote("color-mix(in srgb, var(--rp-overlay) 20%, transparent)");
+        --control-transparent-borderColor-rest: transparent;
+        --control-transparent-borderColor-hover: transparent;
+        --control-transparent-borderColor-active: transparent;
+        --control-danger-fgColor-rest: var(--rp-love);
+        --control-danger-fgColor-hover: var(--rp-base);
+        --control-danger-bgColor-hover: unquote("color-mix(in srgb, var(--rp-love) 80%, transparent)");
+        --control-danger-bgColor-active: var(--rp-love);
+        --control-checked-bgColor-rest: var(--tui-main) !important;
+        --control-checked-bgColor-hover: unquote("color-mix(in srgb, var(--tui-main) 95%, white)") !important;
+        --control-checked-bgColor-active: unquote("color-mix(in srgb, var(--tui-main) 95%, white)") !important;
+        --control-checked-bgColor-disabled: var(--rp-muted);
+        --control-checked-fgColor-rest: var(--rp-base);
+        --control-checked-borderColor-rest: var(--tui-main) !important;
+        --control-checked-borderColor-hover: var(--tui-main) !important;
+        --control-checked-borderColor-active: var(--tui-main) !important;
+        --control-checked-borderColor-disabled: var(--rp-overlay);
+        --controlTrack-bgColor-rest: var(--rp-overlay);
+        --controlTrack-bgColor-hover: var(--rp-overlay);
+        --controlTrack-bgColor-active: var(--rp-overlay);
+        --controlKnob-bgColor-rest: var(--rp-surface);
+        --controlKnob-bgColor-checked: var(--rp-text);
+        --controlKnob-borderColor-rest: var(--rp-overlay);
+        --controlKnob-borderColor-checked: var(--rp-pine);
+
+        --button-default-fgColor-rest: var(--rp-text) !important;
+        --button-default-bgColor-rest: var(--rp-surface) !important;
+        --button-default-bgColor-hover: var(--rp-overlay) !important;
+        --button-default-bgColor-active: var(--rp-hl-med) !important;
+        --button-default-bgColor-selected: var(--rp-overlay) !important;
+        --button-default-bgColor-disabled: var(--rp-base) !important;
+        --button-default-borderColor-rest: var(--rp-overlay) !important;
+        --button-default-borderColor-hover: var(--rp-subtle) !important;
+        --button-default-borderColor-active: var(--rp-subtle) !important;
+        --button-default-borderColor-disabled: var(--rp-overlay) !important;
+        --button-default-fgColor-disabled: var(--rp-muted) !important;
+        --button-default-shadow-resting: none;
+        --button-primary-fgColor-rest: var(--rp-base) !important;
+        --button-primary-fgColor-disabled: unquote("color-mix(in srgb, var(--rp-base) 60%, transparent)") !important;
+        --button-primary-iconColor-rest: var(--rp-base) !important;
+        --button-primary-bgColor-rest: var(--tui-main) !important;
+        --button-primary-bgColor-hover: unquote("color-mix(in srgb, var(--tui-main) 95%, white)") !important;
+        --button-primary-bgColor-active: var(--tui-main) !important;
+        --button-primary-bgColor-disabled: unquote("color-mix(in srgb, var(--tui-main) 50%, transparent)") !important;
+        --button-primary-borderColor-rest: var(--tui-main) !important;
+        --button-primary-borderColor-hover: unquote("color-mix(in srgb, var(--tui-main) 95%, white)") !important;
+        --button-primary-borderColor-active: var(--tui-main) !important;
+        --button-primary-borderColor-disabled: unquote("color-mix(in srgb, var(--tui-main) 50%, transparent)") !important;
+        --button-primary-shadow-selected: none;
+        --button-invisible-fgColor-rest: var(--tui-main) !important;
+        --button-invisible-fgColor-hover: unquote("color-mix(in srgb, var(--tui-main) 90%, white)") !important;
+        --button-invisible-fgColor-disabled: var(--rp-muted);
+        --button-invisible-iconColor-rest: var(--rp-muted);
+        --button-invisible-iconColor-hover: var(--rp-text);
+        --button-invisible-bgColor-rest: transparent;
+        --button-invisible-bgColor-hover: unquote("color-mix(in srgb, var(--rp-overlay) 30%, transparent)");
+        --button-invisible-bgColor-active: unquote("color-mix(in srgb, var(--rp-overlay) 50%, transparent)");
+        --button-invisible-borderColor-rest: transparent;
+        --button-invisible-borderColor-hover: transparent;
+        --button-danger-fgColor-rest: var(--rp-love) !important;
+        --button-danger-fgColor-hover: var(--rp-base) !important;
+        --button-danger-fgColor-active: var(--rp-base) !important;
+        --button-danger-fgColor-disabled: unquote("color-mix(in srgb, var(--rp-love) 50%, transparent)") !important;
+        --button-danger-iconColor-rest: var(--rp-love) !important;
+        --button-danger-iconColor-hover: var(--rp-base) !important;
+        --button-danger-bgColor-rest: var(--rp-surface) !important;
+        --button-danger-bgColor-hover: var(--rp-love) !important;
+        --button-danger-bgColor-active: unquote("color-mix(in srgb, var(--rp-love) 95%, black)") !important;
+        --button-danger-bgColor-disabled: var(--rp-surface) !important;
+        --button-danger-borderColor-rest: var(--rp-overlay) !important;
+        --button-danger-borderColor-hover: var(--rp-love) !important;
+        --button-danger-borderColor-active: unquote("color-mix(in srgb, var(--rp-love) 95%, black)") !important;
+        --button-danger-shadow-selected: none;
+        --button-star-iconColor: var(--rp-gold) !important;
+
+        --overlay-bgColor: var(--rp-surface) !important;
+        --overlay-borderColor: var(--rp-overlay) !important;
+        --overlay-backdrop-bgColor: unquote("color-mix(in srgb, var(--rp-base) 70%, transparent)") !important;
+        --tooltip-bgColor: var(--rp-overlay) !important;
+        --tooltip-fgColor: var(--rp-text) !important;
+        --menu-bgColor-active: var(--rp-overlay);
+        --sideNav-bgColor-selected: var(--rp-overlay);
+        --selectMenu-borderColor: var(--rp-overlay);
+        --selectMenu-bgColor-active: var(--rp-hl-med);
+
+        --underlineNav-borderColor-active: var(--tui-main) !important;
+        --underlineNav-borderColor-hover: var(--rp-subtle);
+        --underlineNav-iconColor-rest: var(--rp-muted);
+
+        --selection-bgColor: unquote("color-mix(in srgb, var(--tui-main) 30%, transparent)") !important;
+        --reactionButton-selected-bgColor-rest: unquote("color-mix(in srgb, var(--tui-main) 20%, transparent)") !important;
+        --reactionButton-selected-bgColor-hover: unquote("color-mix(in srgb, var(--tui-main) 35%, transparent)") !important;
+        --reactionButton-selected-fgColor-rest: var(--tui-main) !important;
+        --reactionButton-selected-fgColor-hover: var(--tui-main) !important;
+
+        --fgColor-default: var(--rp-text) !important;
+        --fgColor-muted: var(--rp-subtle) !important;
+        --fgColor-onEmphasis: var(--rp-base) !important;
+        if tui-style == "Rose-Pine-Dawn" {
+            --fgColor-white: var(--rp-base) !important;
+        } else {
+            --fgColor-white: var(--rp-text) !important;
+        }
+        --fgColor-disabled: var(--rp-muted) !important;
+        --fgColor-link: var(--tui-link) !important;
+        --fgColor-neutral: var(--rp-muted) !important;
+        --fgColor-accent: var(--tui-main) !important;
+        --fgColor-success: var(--rp-foam) !important;
+        --fgColor-attention: var(--rp-gold) !important;
+        --fgColor-severe: var(--rp-rose) !important;
+        --fgColor-danger: var(--rp-love) !important;
+        --fgColor-open: var(--rp-foam) !important;
+        --fgColor-closed: var(--rp-love) !important;
+        --fgColor-done: var(--rp-iris) !important;
+        --fgColor-sponsors: var(--rp-iris) !important;
+
+        --bgColor-default: var(--rp-base) !important;
+        --bgColor-muted: var(--rp-surface) !important;
+        --bgColor-inset: var(--rp-base) !important;
+        --bgColor-emphasis: var(--rp-overlay) !important;
+        --bgColor-inverse: var(--rp-text) !important;
+        --bgColor-disabled: unquote("color-mix(in srgb, var(--rp-base) 80%, transparent)") !important;
+        --bgColor-transparent: transparent !important;
+        --bgColor-neutral-muted: unquote("color-mix(in srgb, var(--rp-overlay) 40%, transparent)") !important;
+        --bgColor-neutral-emphasis: var(--rp-overlay) !important;
+        --bgColor-accent-muted: unquote("color-mix(in srgb, var(--tui-main) 15%, transparent)") !important;
+        --bgColor-accent-emphasis: var(--tui-main) !important;
+        --bgColor-success-muted: unquote("color-mix(in srgb, var(--rp-foam) 10%, transparent)") !important;
+        --bgColor-success-emphasis: var(--rp-foam) !important;
+        --bgColor-attention-muted: unquote("color-mix(in srgb, var(--rp-gold) 12%, transparent)") !important;
+        --bgColor-attention-emphasis: var(--rp-gold) !important;
+        --bgColor-severe-muted: unquote("color-mix(in srgb, var(--rp-rose) 15%, transparent)") !important;
+        --bgColor-severe-emphasis: var(--rp-rose) !important;
+        --bgColor-danger-muted: unquote("color-mix(in srgb, var(--rp-love) 12%, transparent)") !important;
+        --bgColor-danger-emphasis: var(--rp-love) !important;
+        --bgColor-open-muted: unquote("color-mix(in srgb, var(--rp-foam) 10%, transparent)") !important;
+        --bgColor-open-emphasis: var(--rp-foam) !important;
+        --bgColor-closed-muted: unquote("color-mix(in srgb, var(--rp-love) 12%, transparent)") !important;
+        --bgColor-closed-emphasis: var(--rp-love) !important;
+        --bgColor-done-muted: unquote("color-mix(in srgb, var(--rp-iris) 15%, transparent)") !important;
+        --bgColor-done-emphasis: var(--rp-iris) !important;
+        --bgColor-sponsors-muted: unquote("color-mix(in srgb, var(--rp-iris) 12%, transparent)") !important;
+        --bgColor-sponsors-emphasis: var(--rp-iris) !important;
+        --bgColor-white: var(--rp-base);
+
+        --borderColor-default: var(--rp-overlay) !important;
+        --borderColor-muted: var(--rp-overlay) !important;
+        --borderColor-emphasis: var(--rp-subtle) !important;
+        --borderColor-disabled: unquote("color-mix(in srgb, var(--rp-overlay) 75%, transparent)") !important;
+        --borderColor-transparent: transparent !important;
+        --borderColor-neutral-muted: unquote("color-mix(in srgb, var(--rp-muted) 50%, transparent)") !important;
+        --borderColor-neutral-emphasis: var(--rp-muted) !important;
+        --borderColor-accent-muted: unquote("color-mix(in srgb, var(--tui-main) 50%, transparent)") !important;
+        --borderColor-accent-emphasis: var(--tui-main) !important;
+        --borderColor-success-muted: var(--rp-foam) !important;
+        --borderColor-success-emphasis: var(--rp-foam) !important;
+        --borderColor-attention-muted: var(--rp-gold) !important;
+        --borderColor-attention-emphasis: var(--rp-gold) !important;
+        --borderColor-severe-muted: var(--rp-rose) !important;
+        --borderColor-severe-emphasis: var(--rp-rose) !important;
+        --borderColor-danger-muted: var(--rp-love) !important;
+        --borderColor-danger-emphasis: var(--rp-love) !important;
+        --borderColor-open-muted: var(--rp-foam) !important;
+        --borderColor-open-emphasis: var(--rp-foam) !important;
+        --borderColor-closed-muted: var(--rp-love) !important;
+        --borderColor-closed-emphasis: var(--rp-love) !important;
+        --borderColor-done-muted: var(--rp-iris) !important;
+        --borderColor-done-emphasis: var(--rp-iris) !important;
+        --borderColor-sponsors-muted: unquote("color-mix(in srgb, var(--rp-iris) 50%, transparent)") !important;
+        --borderColor-sponsors-emphasis: var(--rp-iris) !important;
+
+        --shadow-inset: none;
+        --shadow-resting-xsmall: none;
+        --shadow-resting-small: none;
+        --shadow-resting-medium: none;
+        --shadow-floating-small: 0 0 0 1px var(--rp-overlay);
+        --shadow-floating-medium: 0 0 0 1px var(--rp-overlay);
+        --shadow-floating-large: 0 0 0 1px var(--rp-overlay);
+        --shadow-floating-xlarge: 0 0 0 1px var(--rp-overlay);
+        --shadow-floating-legacy: none;
+        --outline-focus: 1px solid var(--tui-main);
+
+        --color-calendar-graph-day-bg: var(--rp-surface) !important;
+        --color-calendar-graph-day-border: transparent !important;
+        --color-calendar-graph-day-L1-bg: unquote("color-mix(in srgb, var(--rp-pine) 40%, transparent)") !important;
+        --color-calendar-graph-day-L2-bg: unquote("color-mix(in srgb, var(--rp-pine) 60%, transparent)") !important;
+        --color-calendar-graph-day-L3-bg: unquote("color-mix(in srgb, var(--rp-pine) 80%, transparent)") !important;
+        --color-calendar-graph-day-L4-bg: var(--rp-pine) !important;
+        --color-calendar-graph-day-L2-border: transparent !important;
+        --color-calendar-graph-day-L3-border: transparent !important;
+        --color-calendar-graph-day-L4-border: transparent !important;
+
+        --color-user-mention-fg: var(--tui-main) !important;
+        --color-user-mention-bg: unquote("color-mix(in srgb, var(--tui-main) 20%, transparent)") !important;
+
+        if tui-style == "Rose-Pine-Dawn" {
+            --color-ansi-black: var(--rp-subtle);
+            --color-ansi-black-bright: var(--rp-subtle);
+            --color-ansi-gray: var(--rp-subtle);
+            --color-ansi-white: var(--rp-overlay);
+            --color-ansi-white-bright: var(--rp-overlay);
+        } else {
+            --color-ansi-black: var(--rp-overlay);
+            --color-ansi-black-bright: var(--rp-overlay);
+            --color-ansi-gray: var(--rp-overlay);
+            --color-ansi-white: var(--rp-subtle);
+            --color-ansi-white-bright: var(--rp-subtle);
+        }
+        --color-ansi-love: var(--rp-love);
+        --color-ansi-love-bright: var(--rp-love);
+        --color-ansi-foam: var(--rp-foam);
+        --color-ansi-foam-bright: var(--rp-foam);
+        --color-ansi-gold: var(--rp-gold);
+        --color-ansi-gold-bright: var(--rp-gold);
+        --color-ansi-pine: var(--rp-pine);
+        --color-ansi-pine-bright: var(--rp-pine);
+        --color-ansi-magenta: var(--rp-iris);
+        --color-ansi-magenta-bright: var(--rp-iris);
+        --color-ansi-cyan: var(--rp-foam);
+        --color-ansi-cyan-bright: var(--rp-foam);
+
+        --color-prettylights-syntax-comment: var(--rp-muted);
+        --color-prettylights-syntax-constant: var(--rp-pine);
+        --color-prettylights-syntax-entity: var(--rp-pine);
+        --color-prettylights-syntax-storage-modifier-import: var(--rp-rose);
+        --color-prettylights-syntax-entity-tag: var(--rp-foam);
+        --color-prettylights-syntax-keyword: var(--rp-iris);
+        --color-prettylights-syntax-string: var(--rp-foam);
+        --color-prettylights-syntax-variable: var(--rp-rose);
+        --color-prettylights-syntax-invalid-illegal-text: var(--rp-love);
+        --color-prettylights-syntax-invalid-illegal-bg: unquote("color-mix(in srgb, var(--rp-love) 15%, transparent)");
+        --color-prettylights-syntax-markup-heading: var(--rp-foam);
+        --color-prettylights-syntax-markup-italic: var(--rp-gold);
+        --color-prettylights-syntax-markup-bold: var(--rp-gold);
+        --color-prettylights-syntax-markup-deleted-text: var(--rp-text);
+        --color-prettylights-syntax-markup-deleted-bg: unquote("color-mix(in srgb, var(--rp-love) 40%, transparent)");
+        --color-prettylights-syntax-markup-inserted-text: var(--rp-text);
+        --color-prettylights-syntax-markup-inserted-bg: unquote("color-mix(in srgb, var(--rp-foam) 40%, transparent)");
+        --color-prettylights-syntax-markup-changed-text: var(--rp-text);
+        --color-prettylights-syntax-markup-changed-bg: unquote("color-mix(in srgb, var(--rp-gold) 40%, transparent)");
+
+        --color-scale-white: var(--rp-base);
+        --color-scale-gray-3: var(--rp-muted);
+        --color-scale-gray-5: var(--rp-muted);
+        --color-scale-gray-6: var(--rp-overlay);
+        --color-scale-gray-7: var(--rp-overlay);
+        --color-scale-pine-2: var(--rp-foam);
+        --color-scale-pine-5: var(--rp-pine);
+        --color-scale-foam-3: var(--rp-foam);
+        --color-scale-foam-4: var(--rp-foam);
+    }
+
+    /* ── TUI: monospace font, no rounded corners ── */
+    * {
+        font-family: "JetBrains Mono", "Cascadia Code", "Fira Code", "Iosevka",
+        "Consolas", ui-monospace, monospace !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        scrollbar-color: var(--rp-overlay) transparent !important;
+        scrollbar-width: thin !important;
+    }
+
+    /* ── Selection ── */
+    ::selection {
+        background: var(--tui-main) !important;
+        color: var(--rp-base) !important;
+    }
+    ::-moz-selection {
+        background: var(--tui-main) !important;
+        color: var(--rp-base) !important;
+    }
+
+    /* ── Focus ── */
+    *:focus-visible {
+        outline: 1px solid var(--tui-main) !important;
+        outline-offset: 2px !important;
+        box-shadow: none !important;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: var(--tui-main) !important;
+    }
+
+    /* ── Base page ── */
+    html,
+    body {
+        background-color: var(--rp-base) !important;
+        color: var(--rp-text) !important;
+    }
+
+    /* ── Links ── */
+    a:not(.btn):not(.Button):not([class*="prc-Button"]):not([class*="prc-TopicTag"]):not(.js-year-link):not(.topic-tag) {
+        color: var(--tui-link) !important;
+    }
+    a:not(.btn):not(.Button):not([class*="prc-Button"]):not([class*="prc-TopicTag"]):not(.js-year-link):not(.topic-tag):hover {
+        color: var(--tui-main) !important;
+    }
+
+    /* ── Buttons rendered as links ── */
+    a.btn-primary,
+    a.btn-primary:hover,
+    a[class*="prc-Button"][data-variant="primary"],
+    a[class*="prc-Button"][data-variant="primary"]:hover {
+        color: var(--rp-base) !important;
+    }
+    a.btn:not(.btn-primary):not(.btn-danger) {
+        color: var(--rp-text) !important;
+    }
+    a.btn-danger:hover,
+    a.Button--danger:hover,
+    a.Button--danger:hover .Button-label,
+    a[class*="prc-Button"][data-variant="danger"]:hover {
+        color: var(--rp-base) !important;
+    }
+    a.Button--primary,
+    a.Button--primary .Button-label {
+        color: var(--rp-base) !important;
+    }
+    a.Button--danger {
+        color: var(--rp-love) !important;
+    }
+    a.Button:not(.Button--primary):not(.Button--danger) {
+        color: var(--rp-text) !important;
+    }
+
+    /* ── GitHub CSS variable overrides ── */
+
+    /* ── Header / masthead ── */
+    .AppHeader,
+    .Header,
+    header[role="banner"] {
+        background-color: var(--rp-surface) !important;
+        border-bottom: 1px solid var(--rp-overlay) !important;
+        box-shadow: none !important;
+    }
+
+    /* ── Sidebar nav ── */
+    .AppHeader-globalBar-start,
+    [data-view-component="true"].AppHeader-context {
+        background: transparent !important;
+    }
+
+    /* ── Repo file list ── */
+    .react-directory-commit-age,
+    .react-directory-filename-column {
+        color: var(--rp-text) !important;
+    }
+
+    /* ── Active nav tab ── */
+    .UnderlineNav-item[aria-current="page"],
+    .UnderlineNav-item.selected {
+        border-bottom: 2px solid var(--tui-main) !important;
+        color: var(--rp-text) !important;
+    }
+
+    /* ── Inputs ── */
+    input[type="text"],
+    input[type="search"],
+    input[type="email"],
+    input[type="password"],
+    textarea,
+    select {
+        background: var(--rp-base) !important;
+        border: 1px solid var(--rp-overlay) !important;
+        color: var(--rp-text) !important;
+        caret-color: var(--tui-main) !important;
+        &:focus {
+            border-color: var(--tui-main) !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    /* ── Progress bar ── */
+    .turbo-progress-bar {
+        background-color: var(--tui-main);
+        height: 2px;
+    }
+
+    /* ── Notification dot ── */
+    .notification-indicator .mail-status {
+        background: var(--tui-main);
+    }
+
+    /* ── Header links (logged out) ── */
+    .HeaderMenu-link {
+        color: var(--rp-text);
+        &:hover {
+            color: var(--tui-main);
+        }
+    }
+    .HeaderMenu-toggle-bar {
+        background-color: var(--rp-text);
+    }
+    .header-search-button.placeholder {
+        color: var(--rp-muted);
+    }
+
+    /* ── Activity graph ── */
+    .js-activity-overview-graph .js-highlight-blob {
+        fill: var(--tui-main);
+        stroke: var(--tui-main);
+    }
+
+    /* ── Cinematics off ── */
+    #cinematics {
+        display: none !important;
+    }
+
+    /* ── Contribution graph: year list ── */
+    a.js-year-link {
+        color: var(--rp-subtle) !important;
+        background: transparent !important;
+    }
+    a.js-year-link:hover {
+        color: var(--rp-text) !important;
+        background: var(--rp-overlay) !important;
+    }
+    a.js-year-link.selected,
+    a.js-year-link[aria-current] {
+        color: var(--rp-base) !important;
+        background: var(--tui-main) !important;
+    }
+
+    /* ── Contribution graph: axis labels (Mon/Wed/Fri, month names) ── */
+    .contrib-number,
+    .graph-before-first-group text,
+    .js-calendar-graph text,
+    .ContributionCalendar-label {
+        fill: var(--rp-subtle) !important;
+        color: var(--rp-subtle) !important;
+    }
+
+    /* ── Contribution graph: legend "Less / More" ── */
+    .contrib-legend text,
+    .ContributionCalendar-legend span {
+        color: var(--rp-subtle) !important;
+    }
+
+    /* ── Contribution activity section header (e.g. "June 2026") ── */
+    .profile-timeline-year-list h3,
+    h3.f4.text-normal.mb-1,
+    .contribution-activity-listing h3 {
+        color: var(--rp-text) !important;
+    }
+
+    /* ── General sidebar / timeline text that gets too dim ── */
+    .color-fg-muted,
+    .text-gray,
+    .text-gray-light {
+        color: var(--rp-subtle) !important;
+    }
+
+    /* ── Pinned repo card ── */
+    .pinned-item-list-item {
+        border-color: var(--rp-overlay) !important;
+    }
+    .pinned-item-list-item-content .text-bold {
+        color: var(--rp-text) !important;
+    }
+    /* ── Releases/Tags subnav tabs ── */
+    .subnav-item {
+        color: var(--rp-subtle) !important;
+        background: transparent !important;
+        border-color: transparent !important;
+    }
+    .subnav-item.selected {
+        color: var(--rp-base) !important;
+        background: var(--tui-main) !important;
+    }
+
+    /* ── Topic tags: keep label readable on hover / selected ── */
+    .topic-tag:hover,
+    .topic-tag:focus,
+    .topic-tag:hover *,
+    .topic-tag:focus *,
+    .topic-tag-selected,
+    .topic-tag-selected *,
+    .topic-tag[aria-current],
+    .topic-tag[aria-current] *,
+    .topic-tag-action:hover,
+    .topic-tag-action:focus {
+        color: var(--rp-base) !important;
+    }
+    .topic-tag:hover,
+    .topic-tag:focus,
+    .topic-tag-selected,
+    .topic-tag[aria-current],
+    .topic-tag-action:hover,
+    .topic-tag-action:focus {
+        background-color: var(--tui-main) !important;
+    }
+
+    /* ── Topic tags (Primer React, hashed class names) ── */
+    a[class*="prc-TopicTag-TopicTag"] {
+        color: var(--tui-link) !important;
+    }
+    a[class*="prc-TopicTag-TopicTag"]:hover,
+    a[class*="prc-TopicTag-TopicTag"]:focus-visible {
+        color: var(--rp-base) !important;
+        background-color: var(--tui-main) !important;
+    }
+
+    /* ── Topic tags (classic markup, repo lists) ── */
+    a.topic-tag {
+        color: var(--tui-link) !important;
+    }
+    a.topic-tag:hover,
+    a.topic-tag:focus-visible {
+        color: var(--rp-base) !important;
+        background-color: var(--tui-main) !important;
+    }
+}

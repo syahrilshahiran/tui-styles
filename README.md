@@ -31,6 +31,24 @@ https://github.com/syahrilshahiran/tui-styles/raw/main/stylus/tui-youtube-rose-p
 
 ---
 
+### GitHub — Rosé Pine TUI
+
+Transform GitHub into a terminal-style interface using the Rosé Pine color palette.
+
+**Features**
+
+* Rosé Pine, Moon and Dawn presets
+* Selectable accent color (Love, Gold, Rose, Pine, Foam, Iris)
+* JetBrains Mono typography
+* Sharp borders and no rounded corners
+* Compatible with Stylus
+
+**Install**
+
+https://github.com/syahrilshahiran/tui-styles/raw/main/stylus/tui-github-rose-pine.user.css
+
+---
+
 ### Discord — system24
 
 A terminal-inspired Discord theme by refact0r.

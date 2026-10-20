@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           tui-youtube-rose-pine
 @namespace      github.com/syahrilshahiran/tui-styles
-@version        1.0.7
+@version        1.0.8
 @description    A TUI/terminal-style reskin of YouTube in Rosé Pine colors with adjusted typography.
 @author         syahrilshahiran
 @homepageURL    https://github.com/syahrilshahiran/tui-styles
@@ -13,7 +13,14 @@
     "Rose-Pine-Moon",
     "Rose-Pine-Dawn"
 ]
-@var color     --tui-accent "Accent color" #eb6f92
+@var select tui-accent "Accent color" [
+    "Love",
+    "Gold",
+    "Rose",
+    "Pine",
+    "Foam",
+    "Iris"
+]
 ==/UserStyle== */
 @-moz-document domain("youtube.com") {
     @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap");
@@ -79,8 +86,25 @@
         --tui-border: var(--rp-hl-med);
         --tui-fg: var(--rp-text);
         --tui-fg-dim: var(--rp-subtle);
-        --tui-main: var(--rp-love);
-        --tui-alt: var(--rp-foam);
+        if tui-accent == "Gold" {
+            --tui-main: var(--rp-gold);
+        } else if tui-accent == "Rose" {
+            --tui-main: var(--rp-rose);
+        } else if tui-accent == "Pine" {
+            --tui-main: var(--rp-pine);
+        } else if tui-accent == "Foam" {
+            --tui-main: var(--rp-foam);
+        } else if tui-accent == "Iris" {
+            --tui-main: var(--rp-iris);
+        } else {
+            --tui-main: var(--rp-love);
+        }
+        /* Secondary color; swap to iris when the accent is foam so it stays distinct */
+        if tui-accent == "Foam" {
+            --tui-alt: var(--rp-iris);
+        } else {
+            --tui-alt: var(--rp-foam);
+        }
         --tui-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.2);
     }
 
