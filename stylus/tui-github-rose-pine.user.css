@@ -556,6 +556,38 @@
         }
     }
 
+    /* ── Quick search: text is drawn by an overlay behind the input, so the
+       input must stay transparent or it hides what you type ── */
+    [class*="inputWrapper__"] {
+        position: relative;
+        background: var(--rp-base) !important;
+        .TextInput-wrapper,
+        input {
+            background: transparent !important;
+        }
+        input {
+            position: relative;
+            z-index: 1;
+        }
+        [data-testid="quick-search-input-overlay"] {
+            color: var(--rp-text) !important;
+            z-index: 0;
+        }
+    }
+
+    /* Fallback: render the text in the input itself and hide the overlay */
+    input[aria-label="Search or jump to"],
+    input[role="combobox"][aria-controls] {
+        color: var(--rp-text) !important;
+        -webkit-text-fill-color: var(--rp-text) !important;
+        opacity: 1 !important;
+        position: relative;
+        z-index: 2;
+    }
+    [data-testid="quick-search-input-overlay"] {
+        display: none !important;
+    }
+
     /* ── Progress bar ── */
     .turbo-progress-bar {
         background-color: var(--tui-main);
