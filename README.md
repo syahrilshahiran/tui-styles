@@ -49,6 +49,28 @@ https://github.com/syahrilshahiran/tui-styles/raw/main/stylus/tui-github-rose-pi
 
 ---
 
+### Reddit — Rosé Pine TUI
+
+Transform Reddit into a terminal-style interface using the Rosé Pine color palette.
+
+**Features**
+
+* Rosé Pine, Moon and Dawn presets
+* Selectable accent color (Love, Gold, Rose, Pine, Foam, Iris)
+* JetBrains Mono typography
+* Sharp borders and no rounded corners where possible
+* Compatible with Stylus
+
+> **Note:** Reddit's current site is built from web components with shadow DOM, which Stylus
+> can't restyle directly. Only inherited properties (CSS variables, color, fonts) reach inside
+> shadow roots, so a few elements keep Reddit's rounded corners or default fills.
+
+**Install**
+
+https://github.com/syahrilshahiran/tui-styles/raw/main/stylus/tui-reddit-rose-pine.user.css
+
+---
+
 ### Discord — system24
 
 A terminal-inspired Discord theme by refact0r.

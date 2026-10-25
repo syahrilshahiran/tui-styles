@@ -1,0 +1,788 @@
+/* ==UserStyle==
+@name           tui-reddit-rose-pine
+@namespace      github.com/syahrilshahiran/tui-styles
+@version        1.0.0
+@description    A TUI/terminal-style reskin of Reddit in Rosé Pine colors with monospace typography.
+@author         syahrilshahiran
+@homepageURL    https://github.com/syahrilshahiran/tui-styles
+@license        MIT
+@preprocessor   stylus
+
+@var select tui-style "Preset Theme" [
+    "Rose-Pine",
+    "Rose-Pine-Moon",
+    "Rose-Pine-Dawn"
+]
+@var select tui-accent "Accent color" [
+    "Love",
+    "Gold",
+    "Rose",
+    "Pine",
+    "Foam",
+    "Iris"
+]
+==/UserStyle== */
+
+/* ─── NOTICE: SHADOW DOM ──────────────────────────────────────────────
+   Reddit's current site is built from web components with shadow roots.
+   Only inherited properties (CSS variables, color, fonts) reach inside them,
+   so border-radius, box-shadow and background rules cannot. These parts keep
+   Reddit's rounded corners or default fills and cannot be restyled here. */
+@-moz-document domain("reddit.com") {
+    @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap");
+
+    /* ─── ROSE PINE PALETTE ──────────────────────────────────────────── */
+    :root {
+        if tui-style == "Rose-Pine" {
+            --rp-base: #191724;
+            --rp-surface: #1f1d2e;
+            --rp-overlay: #26233a;
+            --rp-muted: #6e6a86;
+            --rp-subtle: #908caa;
+            --rp-text: #e0def4;
+            --rp-love: #eb6f92;
+            --rp-gold: #f6c177;
+            --rp-rose: #ebbcba;
+            --rp-pine: #31748f;
+            --rp-foam: #9ccfd8;
+            --rp-iris: #c4a7e7;
+            --rp-hl-low: #21202e;
+            --rp-hl-med: #403d52;
+            --rp-hl-high: #524f67;
+            color-scheme: dark;
+        }
+        else if tui-style == "Rose-Pine-Moon" {
+            --rp-base: #232136;
+            --rp-surface: #2a273f;
+            --rp-overlay: #393552;
+            --rp-muted: #6e6a86;
+            --rp-subtle: #908caa;
+            --rp-text: #e0def4;
+            --rp-love: #eb6f92;
+            --rp-gold: #f6c177;
+            --rp-rose: #ea9a97;
+            --rp-pine: #3e8fb0;
+            --rp-foam: #9ccfd8;
+            --rp-iris: #c4a7e7;
+            --rp-hl-low: #2a283e;
+            --rp-hl-med: #44415a;
+            --rp-hl-high: #56526e;
+            color-scheme: dark;
+        }
+        else if tui-style == "Rose-Pine-Dawn" {
+            --rp-base: #faf4ed;
+            --rp-surface: #fffaf3;
+            --rp-overlay: #f2e9e1;
+            --rp-muted: #9893a5;
+            --rp-subtle: #797593;
+            --rp-text: #575279;
+            --rp-love: #b4637a;
+            --rp-gold: #ea9d34;
+            --rp-rose: #d7827e;
+            --rp-pine: #286983;
+            --rp-foam: #56949f;
+            --rp-iris: #907aa9;
+            --rp-hl-low: #f4ede8;
+            --rp-hl-med: #dfdad9;
+            --rp-hl-high: #cecacd;
+            color-scheme: light;
+        }
+
+        if tui-accent == "Gold" {
+            --tui-main: var(--rp-gold);
+        } else if tui-accent == "Rose" {
+            --tui-main: var(--rp-rose);
+        } else if tui-accent == "Pine" {
+            --tui-main: var(--rp-pine);
+        } else if tui-accent == "Foam" {
+            --tui-main: var(--rp-foam);
+        } else if tui-accent == "Iris" {
+            --tui-main: var(--rp-iris);
+        } else {
+            --tui-main: var(--rp-love);
+        }
+
+        /* Link color; swap to iris when the accent is foam so hover stays visible */
+        if tui-accent == "Foam" {
+            --tui-link: var(--rp-iris);
+        } else {
+            --tui-link: var(--rp-foam);
+        }
+    }
+
+    /* ─── REDDIT INTERNAL VARIABLE OVERRIDES ────────────────────────── */
+    :root,
+    :root.theme-light,
+    :root.theme-dark,
+    .theme-beta,
+    .theme-rpl,
+    shreddit-app,
+    body {
+        --color-primary-onBackground: var(--rp-base) !important;
+        /* Primary buttons invert on hover: dark fill, accent label (hover label color is the accent) */
+        --color-button-primary-background-hover: var(--rp-overlay) !important;
+        --color-button-primary-background-activated: var(--rp-overlay) !important;
+        --color-primary-onBackground-selected: var(--rp-base) !important;
+        --color-neutral-border: var(--rp-hl-med) !important;
+        --color-neutral-border-weak: var(--rp-hl-med) !important;
+        --color-neutral-border-medium: var(--rp-hl-med) !important;
+        --color-neutral-border-strong: var(--rp-hl-high) !important;
+
+        --color-neutral-content: var(--rp-text) !important;
+        --color-neutral-content-strong: var(--rp-text) !important;
+        --color-neutral-content-weak: var(--rp-subtle) !important;
+        --color-neutral-content-disabled: var(--rp-muted) !important;
+        --color-neutral-background: var(--rp-base) !important;
+        --color-neutral-background-selected: var(--rp-hl-med) !important;
+        --color-neutral-background-weak: var(--rp-surface) !important;
+        --color-neutral-background-medium: var(--rp-surface) !important;
+        --color-neutral-background-strong: var(--rp-overlay) !important;
+        --color-neutral-background-hover: var(--rp-hl-low) !important;
+        --shreddit-content-background: var(--rp-base) !important;
+
+        --color-tone-1: var(--rp-text) !important;
+        --color-tone-2: var(--rp-subtle) !important;
+        --color-tone-3: var(--rp-hl-med) !important;
+        --color-tone-4: var(--rp-hl-med) !important;
+        --color-tone-5: var(--rp-hl-low) !important;
+        --color-tone-6: var(--rp-surface) !important;
+        --color-tone-7: var(--rp-base) !important;
+
+        --color-primary: var(--tui-main) !important;
+        --color-primary-hover: var(--tui-main) !important;
+        --color-primary-background: var(--tui-main) !important;
+        --color-primary-background-hover: var(--tui-main) !important;
+        --color-primary-background-selected: var(--tui-main) !important;
+        --color-secondary: var(--rp-text) !important;
+        --color-secondary-hover: var(--rp-text) !important;
+        --color-secondary-weak: var(--rp-subtle) !important;
+        --color-secondary-plain: var(--rp-text) !important;
+        --color-secondary-plain-hover: var(--tui-main) !important;
+        --color-secondary-background: var(--rp-surface) !important;
+        --color-secondary-background-hover: var(--rp-hl-low) !important;
+        --color-secondary-background-selected: var(--rp-hl-med) !important;
+
+        --color-action-upvote: var(--rp-gold) !important;
+        --color-action-downvote: var(--rp-iris) !important;
+        --color-upvote-background: var(--rp-gold) !important;
+        --color-downvote-background: var(--rp-iris) !important;
+        --color-media-background: var(--rp-surface) !important;
+        --color-media-onbackground: var(--rp-text) !important;
+        --color-media-onbackground-disabled: var(--rp-hl-med) !important;
+
+        /* Buttons */
+        --button-border-color: var(--rp-hl-med) !important;
+        --button-border-color-default: var(--rp-hl-med) !important;
+        --button-border-color-hover: var(--tui-main) !important;
+        --button-border-color-active: var(--tui-main) !important;
+        --button-border-color-activated: var(--tui-main) !important;
+        --button-border-color-disabled: var(--rp-hl-low) !important;
+        --button-color-background-default: transparent !important;
+        --button-color-background-hover: var(--rp-hl-low) !important;
+        --button-color-background-focus: var(--rp-hl-low) !important;
+        --button-color-background-active: var(--rp-hl-med) !important;
+        --button-color-background-activated: var(--rp-hl-med) !important;
+        --button-color-background-disabled: transparent !important;
+        --button-color-text-default: var(--rp-text) !important;
+        --button-color-text-hover: var(--tui-main) !important;
+        --button-color-text-activated: var(--tui-main) !important;
+        --button-color-text-disabled: var(--rp-muted) !important;
+        --color-button-secondary-text: var(--rp-text) !important;
+        --color-button-secondary-text-activated: var(--rp-text) !important;
+        --color-button-secondary-text-disabled: var(--rp-muted) !important;
+        --color-button-secondary-border: var(--rp-hl-med) !important;
+        --color-button-secondary-background: var(--rp-surface) !important;
+        --color-button-secondary-background-focus: var(--rp-hl-low) !important;
+        --color-button-secondary-background-hover: var(--rp-hl-low) !important;
+        --color-button-secondary-background-activated: var(--rp-hl-med) !important;
+        --color-button-secondary-background-disabled: var(--rp-surface) !important;
+    }
+
+    /* ─── TYPOGRAPHY ────────────────────────────────────────────────── */
+    html, body,
+    * {
+        font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace !important;
+    }
+
+    body {
+        background-color: var(--rp-base) !important;
+        color: var(--rp-text) !important;
+        font-size: 13px;
+        letter-spacing: 0;
+    }
+
+    /* Keep icon fonts / svgs from being clobbered */
+    svg {
+        fill: currentColor;
+    }
+
+    ::selection {
+        background: var(--rp-hl-high);
+        color: var(--rp-text);
+    }
+
+    /* ─── TUI: NO ROUNDED CORNERS, NO SHADOWS ───────────────────────── */
+    *,
+    *::before,
+    *::after {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    /* ─── LINKS ─────────────────────────────────────────────────────── */
+    a {
+        color: var(--tui-link);
+    }
+    a:hover {
+        color: var(--tui-main);
+        text-decoration: underline;
+    }
+
+    /* ─── HEADER / NAV ──────────────────────────────────────────────── */
+    reddit-header-large,
+    header {
+        background-color: var(--rp-base) !important;
+        border-bottom: 1px solid var(--rp-hl-med) !important;
+    }
+    /* Utility class is reused by comment threadline masks and collapse icons: no borders there */
+    .bg-neutral-background:not(header):not(reddit-header-large):not(button) {
+        background-color: var(--rp-base) !important;
+        border: none !important;
+    }
+
+    reddit-search-large,
+    textarea,
+    select {
+        background-color: var(--rp-surface) !important;
+        color: var(--rp-text) !important;
+        border: 1px solid var(--rp-hl-med) !important;
+    }
+    input {
+        color: var(--rp-text) !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+    textarea:focus,
+    select:focus,
+    reddit-search-large:focus-within {
+        border-color: var(--tui-main) !important;
+        outline: none !important;
+    }
+
+    reddit-search-large {
+        display: block;
+        max-width: 640px;
+        --color-secondary-background: var(--rp-surface) !important;
+        --color-neutral-background-hover: var(--rp-surface) !important;
+    }
+    /* Collapsed search bar (header) */
+    reddit-search-large form.reddit-search-bar,
+    reddit-search-large .search-input,
+    reddit-search-large rpl-input-chip {
+        border-radius: 0 !important;
+    }
+    reddit-search-large form.reddit-search-bar {
+        background: var(--rp-surface) !important;
+        border: 1px solid var(--rp-hl-med) !important;
+    }
+    reddit-search-large form.reddit-search-bar:focus-within {
+        border-color: var(--tui-main) !important;
+    }
+    reddit-search-large .search-input {
+        border-color: transparent !important;
+    }
+    reddit-search-large rpl-input-chip {
+        --rpl-input-chip-background-color: var(--rp-base);
+        --rpl-input-chip-selected-background-color: var(--rp-base);
+        --rpl-input-chip-border-radius: 0;
+        border: 1px solid var(--rp-hl-med) !important;
+    }
+
+    /* Comment composer / comment search draw their own rounded box in shadow DOM and can't be
+       squared. Keep them rounded and make the outer host invisible so no square frame shows. */
+    faceplate-textarea-input,
+    pdp-comment-search-input,
+    pdp-comment-search-input faceplate-search-input,
+    comment-composer-host faceplate-textarea-input {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        --color-neutral-background: transparent !important;
+        --color-neutral-background-hover: transparent !important;
+        --color-neutral-background-weak: transparent !important;
+        --color-secondary-background: transparent !important;
+        --color-secondary-background-hover: transparent !important;
+        --color-neutral-background-medium: transparent !important;
+        --color-neutral-background-strong: transparent !important;
+        --color-neutral-background-selected: transparent !important;
+        --color-secondary-background-selected: transparent !important;
+        --color-tone-5: transparent !important;
+        --color-tone-6: transparent !important;
+        --color-tone-7: transparent !important;
+        --color-input-background: transparent !important;
+        --color-interactive-background: transparent !important;
+        --faceplate-textarea-input-background: transparent !important;
+        --color-neutral-border: var(--rp-hl-med) !important;
+        --color-neutral-border-weak: var(--rp-hl-med) !important;
+    }
+    /* Fill the composer's pill with the surface tone (matching its inner band) and clip it round */
+    comment-composer-host faceplate-textarea-input,
+    faceplate-textarea-input {
+        background: var(--rp-surface) !important;
+        border-radius: 22px !important;
+        overflow: hidden;
+    }
+    comment-body-header,
+    search-dynamic-id-cache-controller {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    /* Search dropdown (classes from Reddit's markup) */
+    .reddit-search-bar,
+    .reddit-search-bar form,
+    .reddit-search-bar .rounded-5,
+    .rounded-5,
+    faceplate-search-input,
+    rpl-input-chip,
+    .scoped-search-pill,
+    .expanded-composer-ask-pill {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+    .reddit-search-bar {
+        background: var(--rp-surface) !important;
+        border: 1px solid var(--rp-hl-med) !important;
+    }
+    /* The inner faceplate-search-input draws its own rounded box in shadow DOM:
+       make its border/background match the outer panel so only the square edge shows */
+    .reddit-search-bar,
+    .reddit-search-bar faceplate-search-input {
+        --color-neutral-border: var(--rp-surface) !important;
+        --color-neutral-border-weak: var(--rp-surface) !important;
+        --color-neutral-border-medium: var(--rp-surface) !important;
+        --color-neutral-background: var(--rp-surface) !important;
+        --color-neutral-background-hover: var(--rp-surface) !important;
+        --color-secondary-background: var(--rp-surface) !important;
+        --color-secondary-background-hover: var(--rp-surface) !important;
+        --color-secondary-background-selected: var(--rp-surface) !important;
+    }
+    .reddit-search-bar:focus-within {
+        border-color: var(--tui-main) !important;
+    }
+    .reddit-search-bar form,
+    .reddit-search-bar form:hover {
+        background: var(--rp-surface) !important;
+    }
+    .reddit-search-bar .border-neutral-border-weak {
+        border-color: var(--rp-hl-med) !important;
+    }
+    rpl-input-chip,
+    .scoped-search-pill {
+        border: 1px solid var(--rp-hl-med) !important;
+        background: var(--rp-base) !important;
+        color: var(--rp-text) !important;
+    }
+    .rounded-full,
+    .rounded-full img {
+        border-radius: 0 !important;
+    }
+
+    /* Subreddit scope chip ("r/Sabah x") */
+    reddit-search-large faceplate-tracker,
+    reddit-search-large [role="button"],
+    reddit-search-large .chip {
+        border-radius: 0 !important;
+        border: 1px solid var(--rp-hl-med) !important;
+        background: var(--rp-base) !important;
+    }
+    ::placeholder {
+        color: var(--rp-muted) !important;
+    }
+
+    reddit-header-large reddit-search-large[home-revamp-enabled]:defined:not(:focus-within):before,
+    reddit-header-large reddit-search-large[show-ask-button]:defined:not(:focus-within):before {
+        background: var(--rp-hl-med) !important;
+    }
+    reddit-header-large reddit-search-large[home-revamp-enabled]:defined:not(:focus-within):after,
+    reddit-header-large reddit-search-large[show-ask-button]:defined:not(:focus-within):after {
+        display: none !important;
+    }
+
+    /* ─── SIDEBAR ───────────────────────────────────────────────────── */
+    #left-sidebar,
+    #left-sidebar-container {
+        background-color: var(--rp-base) !important;
+        border-right: 1px solid var(--rp-hl-med) !important;
+    }
+
+    /* Home/Popular/News/Explore live in shadow DOM; their hover fill keeps Reddit's rounded corners
+       (not reachable from here) but is shown so hover is visible. */
+    left-nav-top-section {
+        border: none !important;
+        --color-neutral-background-hover: var(--rp-hl-low) !important;
+        --color-neutral-background-selected: var(--rp-hl-low) !important;
+        --color-secondary-background-hover: var(--rp-hl-low) !important;
+        --color-secondary-background-selected: var(--rp-hl-low) !important;
+        --color-secondary-plain: var(--rp-text) !important;
+        --color-secondary-plain-hover: var(--tui-main) !important;
+    }
+    /* Light-DOM nav rows: square fills */
+    nav[aria-label="Primary"] li > a,
+    nav[aria-label="Primary"] li > div {
+        border-radius: 0 !important;
+    }
+
+    /* ─── POSTS ─────────────────────────────────────────────────────── */
+    /* One border per feed item (on the wrapper), with real spacing instead of divider rules */
+    article,
+    shreddit-ad-post {
+        border: 1px solid var(--rp-hl-med) !important;
+        background-color: var(--rp-base) !important;
+        margin-bottom: 8px !important;
+    }
+    article:hover,
+    shreddit-ad-post:hover {
+        border-color: var(--tui-main) !important;
+    }
+    shreddit-post {
+        border: none !important;
+        margin: 0 !important;
+        background-color: transparent !important;
+    }
+    shreddit-ad-post {
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
+    }
+    shreddit-feed > hr {
+        display: none !important;
+    }
+    shreddit-post:not([view-type="pdp"]):hover {
+        background-color: var(--rp-hl-low) !important;
+    }
+    shreddit-post[view-type="pdp"] {
+        border: none !important;
+    }
+    shreddit-post h1[slot="title"] {
+        font-size: 20px !important;
+        line-height: 1.35 !important;
+        color: var(--rp-text) !important;
+    }
+
+    /* Thin dividers between feed items instead of fat gaps */
+    hr,
+    .border-b-neutral-border-weak {
+        border: none !important;
+        border-top: 1px solid var(--rp-hl-med) !important;
+        height: 0 !important;
+    }
+    /* Sidebar section dividers keep Reddit's spacing (my-md) and align with the content padding (px-md) */
+    hr {
+        margin: 16px 16px !important;
+    }
+    .border-b-neutral-border-weak {
+        margin: 0 !important;
+    }
+
+    .py-md,
+    .xs\:rounded-\[16px\],
+    .rounded-\[16px\] {
+        border: 1px solid var(--rp-hl-med) !important;
+    }
+
+    /* Back button floats beside the post: give it breathing room from the border */
+    /* Reddit only floats it (absolute) when there is room; otherwise it sits inline
+       inside the credit bar and collides with the community name. Force a clear layout. */
+    pdp-back-button {
+        position: absolute !important;
+        top: 16px !important;
+        inset-inline-start: -3.5rem !important;
+        margin: 0 !important;
+    }
+    @media (max-width: 1100px) {
+        pdp-back-button {
+            position: static !important;
+            margin-inline-end: 8px !important;
+            flex-shrink: 0;
+        }
+    }
+    /* The button itself lives in shadow DOM, so draw the square on the host and
+       make the inner (rounded) button's own border/background invisible via variables */
+    pdp-back-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--rp-hl-med) !important;
+        background: var(--rp-surface) !important;
+        color: var(--rp-text) !important;
+        border-radius: 0 !important;
+        overflow: hidden;
+        --button-border-radius: 0 !important;
+        --button-border-color-default: transparent !important;
+        --button-border-color-hover: transparent !important;
+        --button-border-color-active: transparent !important;
+        --button-color-background-default: transparent !important;
+        --button-color-background-hover: transparent !important;
+        --button-color-background-focus: transparent !important;
+        --color-button-secondary-border: transparent !important;
+        --color-button-secondary-background: transparent !important;
+        --color-button-secondary-background-hover: transparent !important;
+        --color-button-secondary-background-focus: transparent !important;
+        --color-button-secondary-background-activated: transparent !important;
+        --color-button-secondary-background-disabled: transparent !important;
+        --button-color-background-active: transparent !important;
+        --button-color-background-activated: transparent !important;
+        --button-color-background-disabled: transparent !important;
+        --button-color-overlay: transparent !important;
+        --button-border-color: transparent !important;
+        --button-border-color-activated: transparent !important;
+        --button-border-color-disabled: transparent !important;
+        --color-secondary-background: transparent !important;
+        --color-secondary-background-hover: transparent !important;
+        --color-secondary-background-selected: transparent !important;
+        --color-neutral-background-hover: transparent !important;
+        --color-neutral-background-weak: transparent !important;
+        --color-neutral-background-medium: transparent !important;
+        --color-neutral-background-strong: transparent !important;
+        --color-neutral-border-weak: transparent !important;
+        --color-neutral-border-medium: transparent !important;
+        --color-neutral-border-strong: transparent !important;
+    }
+    pdp-back-button:hover {
+        border-color: var(--tui-main) !important;
+        color: var(--tui-main) !important;
+    }
+
+    /* Post titles */
+    [slot="title"],
+    a[slot="title"],
+    h1, h2, h3 {
+        color: var(--rp-text) !important;
+        font-weight: 600;
+    }
+    shreddit-post:not([view-type="pdp"]):hover [slot="title"] {
+        color: var(--tui-main) !important;
+    }
+
+    /* Credit bar (community, author, time): no stray background */
+    shreddit-post [slot="credit-bar"],
+    shreddit-post [slot="credit-bar"] *:not(shreddit-distinguished-post-tags):not(shreddit-distinguished-post-tags *):not(author-flair-event-handler *),
+    shreddit-post-overflow-menu,
+    shreddit-post-credit-bar {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+    shreddit-post [slot="credit-bar"] a,
+    shreddit-post-credit-bar a {
+        color: var(--rp-subtle) !important;
+    }
+    shreddit-post [slot="credit-bar"] a:hover,
+    shreddit-post-credit-bar a:hover {
+        color: var(--tui-main) !important;
+        text-decoration: underline;
+    }
+    shreddit-post [slot="credit-bar"] a[href^="/r/"],
+    shreddit-post-credit-bar a[href^="/r/"] {
+        color: var(--rp-iris) !important;
+        font-weight: 600;
+    }
+
+    /* Mod / admin / OP tags: solid pine pill so it never blends into the bar */
+    shreddit-distinguished-post-tags {
+        background-color: var(--rp-pine) !important;
+        color: var(--rp-text) !important;
+        padding: 0 4px !important;
+        --color-tone-1: var(--rp-text) !important;
+        --color-neutral-content: var(--rp-text) !important;
+        --color-neutral-content-weak: var(--rp-text) !important;
+        --color-secondary-weak: var(--rp-text) !important;
+    }
+    shreddit-distinguished-post-tags *,
+    shreddit-distinguished-post-tags a {
+        background: transparent !important;
+        color: var(--rp-text) !important;
+    }
+
+    /* User flair (MOD TEAM etc.): Reddit sets an inline background on some; give them all one
+       readable style: iris fill, dark label */
+    author-flair-event-handler > span,
+    shreddit-post [slot="credit-bar"] author-flair-event-handler > span {
+        background-color: var(--rp-iris) !important;
+        color: var(--rp-base) !important;
+        border: 1px solid var(--rp-iris) !important;
+    }
+    author-flair-event-handler .flair-content,
+    author-flair-event-handler .flair-content * {
+        background: transparent !important;
+        color: var(--rp-base) !important;
+    }
+
+    /* Flair chips without their own color (e.g. mod flairs): fill the whole chip, not just the label,
+       so no grey bar shows at the start/end of the text */
+    .bg-tone-4:not([style*="background"]) {
+        background-color: var(--rp-iris) !important;
+        color: var(--rp-base) !important;
+    }
+
+    /* Flair */
+    .flair-content,
+    shreddit-post-flair a,
+    shreddit-post-flair span {
+        color: var(--rp-base) !important;
+        background-color: var(--rp-iris) !important;
+    }
+    /* Compact flair chip: remove the extra height/margin under the label */
+    shreddit-post-flair {
+        margin: 0 0 4px !important;
+        padding: 0 !important;
+        display: block;
+    }
+    shreddit-post-flair a,
+    shreddit-post-flair span,
+    shreddit-post-flair .flair-content {
+        display: inline-block !important;
+        height: auto !important;
+        min-height: 0 !important;
+        line-height: 16px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+        vertical-align: top;
+    }
+
+    /* Text / metadata */
+    .text-neutral-content-weak,
+    [slot="credit-bar"],
+    time {
+        color: var(--rp-subtle) !important;
+    }
+
+    .text-global-brand-orangered {
+        background: unquote("color-mix(in srgb, var(--tui-main) 20%, transparent)") !important;
+    }
+    .text-global-brand-orangered faceplate-number {
+        color: var(--tui-main) !important;
+    }
+
+    /* ─── VOTES ─────────────────────────────────────────────────────── */
+    [upvote]:hover,
+    [upvote][aria-pressed="true"],
+    button[upvote].text-action-upvote {
+        color: var(--rp-gold) !important;
+    }
+    [downvote]:hover,
+    [downvote][aria-pressed="true"] {
+        color: var(--rp-iris) !important;
+    }
+
+    /* ─── BUTTONS ───────────────────────────────────────────────────── */
+    button,
+    a.button,
+    .button-medium,
+    .button-small,
+    .button-large {
+        border: 1px solid var(--rp-hl-med) !important;
+        background-color: transparent;
+        color: var(--rp-text) !important;
+        font-weight: 500;
+    }
+    button:hover,
+    a.button:hover {
+        border-color: var(--tui-main) !important;
+        color: var(--tui-main) !important;
+        background-color: var(--rp-hl-low) !important;
+    }
+    /* Nav toggle sits over the sidebar divider: needs a solid fill so the line doesn't show through */
+    #flex-nav-expand-button,
+    #flex-nav-collapse-button {
+        background-color: var(--rp-base) !important;
+    }
+    #flex-nav-expand-button:hover,
+    #flex-nav-collapse-button:hover {
+        background-color: var(--rp-hl-low) !important;
+    }
+    /* Primary (join, post, etc.) */
+    .button-primary,
+    button.bg-button-primary,
+    [class*="button-primary"] {
+        background-color: var(--tui-main) !important;
+        border-color: var(--tui-main) !important;
+        color: var(--rp-base) !important;
+    }
+
+    /* ─── COMMENTS ──────────────────────────────────────────────────── */
+    shreddit-comment,
+    shreddit-comment-tree {
+        color: var(--rp-text);
+    }
+    shreddit-comment::part(tree-line),
+    shreddit-comment [slot="comment-tree-line"],
+    .border-l {
+        border-color: var(--rp-hl-med) !important;
+    }
+    shreddit-comment:hover > [slot="comment-tree-line"],
+    shreddit-comment:hover::part(tree-line) {
+        border-color: var(--tui-main) !important;
+    }
+
+    /* ─── CODE ──────────────────────────────────────────────────────── */
+    code, pre, kbd {
+        background-color: var(--rp-overlay) !important;
+        color: var(--rp-gold) !important;
+        border: 1px solid var(--rp-hl-med) !important;
+        padding: 1px 4px;
+    }
+    pre {
+        padding: 8px 12px;
+    }
+    pre code {
+        border: none !important;
+        padding: 0;
+    }
+
+    blockquote {
+        border-left: 2px solid var(--tui-main) !important;
+        color: var(--rp-subtle) !important;
+        background: transparent !important;
+    }
+
+    table, th, td {
+        border: 1px solid var(--rp-hl-med) !important;
+    }
+
+    /* ─── SIDEBAR WIDGETS / MENUS / DIALOGS ─────────────────────────── */
+    shreddit-subreddit-header-buttons,
+    community-highlight-card,
+    [data-testid="subreddit-sidebar"],
+    faceplate-tracker[source="community_sidebar"],
+    .sidebar-widget,
+    faceplate-dropdown-menu,
+    faceplate-menu,
+    shreddit-async-loader,
+    dialog,
+    [role="dialog"],
+    [role="menu"] {
+        background-color: var(--rp-surface) !important;
+        border-color: var(--rp-hl-med) !important;
+    }
+
+    /* ─── SCROLLBARS ────────────────────────────────────────────────── */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--rp-hl-med) var(--rp-base);
+    }
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        background: var(--rp-base);
+    }
+    ::-webkit-scrollbar-thumb {
+        background: var(--rp-hl-med);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--tui-main);
+    }
+}
